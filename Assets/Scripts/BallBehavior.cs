@@ -3,13 +3,14 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class BalllBehavior : MonoBehaviour
+public class BallBehavior : MonoBehaviour
 {
     //ball physics
     public Rigidbody rb;
     public float bumpForce = 8f;
     public float spikeForce = 12f;
     public float upwardForce = 5f;
+    public float ballGravityScale = 0.5f; //normal = 1   floaty < 1   bouncy > 1
 
     //player
     public Transform player;
@@ -18,6 +19,9 @@ public class BalllBehavior : MonoBehaviour
     //bumping
     private bool bumpable = true;
     private float bumpCooldown = 0.2f;
+    
+    //spiking
+    public float hitRange = 2f;
 
     void Update()
     {
@@ -25,6 +29,11 @@ public class BalllBehavior : MonoBehaviour
         {
             SpikeBall();
         }
+    }
+
+    void FixedUpdate()
+    {
+        rb.AddForce(Physics.gravity * (ballGravityScale), ForceMode.Acceleration);
     }
     
     private void OnCollisionEnter(Collision collision)
@@ -54,7 +63,7 @@ public class BalllBehavior : MonoBehaviour
         Debug.Log("Spike ball");
         
         Vector3 direction = (transform.position - player.position).normalized;
-        direction.y = -0.2f;
+        direction.y = -0.25f;
         
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction * spikeForce, ForceMode.Impulse);
@@ -67,6 +76,6 @@ public class BalllBehavior : MonoBehaviour
 
     private bool IsCloseToPlayer()
     {
-        return Vector3.Distance(transform.position, player.position) < 2f;
+        return Vector3.Distance(transform.position, player.position) < hitRange;
     }
 }

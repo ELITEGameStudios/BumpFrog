@@ -32,16 +32,20 @@ public class PlayerMovement : MonoBehaviour
             if(grounded && InputManager.instance.GetJump()){
                 Jump();
             }
+            
+            if (InputManager.instance.GetDive()){
+                Dive();
+            }
         }
-        else if (InputManager.instance.GetDive()){
-            Dive();
-        }
+
     }
     
 
     void Dive()
     {
-        rb.linearVelocity = spaceTo3D(InputManager.instance.GetMovement()) * diveVelocity;
+        rb.linearVelocity = 
+            spaceTo3D(InputManager.instance.GetMovement().normalized) * diveVelocity
+            + Vector3.up * jumpSpeed / 3;
         diveTimer = diveTime;
     }
 

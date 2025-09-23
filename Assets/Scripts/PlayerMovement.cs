@@ -75,4 +75,9 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
     }
+
+    public bool IsAirborne()
+    {
+        return !grounded;
+    }
 }

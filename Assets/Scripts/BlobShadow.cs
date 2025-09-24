@@ -8,14 +8,11 @@ public class BlobShadow : MonoBehaviour
 
     void FixedUpdate()
     {
-        Ray downRay = new Ray(new Vector3(this.transform.position.x, this.transform.position.y - offset, this.transform.position.z), -Vector3.up);
+        // Ray downRay = new Ray(new Vector3(this.transform.position.x, this.transform.position.y - offset, this.transform.position.z), -Vector3.up);
 
-        Vector3 hitPosition = hit.point;
-        shadow.transform.position = BallBehavior.instance.GetLandingPosition(); //hitPosition;
-
-        if (Physics.Raycast(downRay, out hit))
-        {
-            print(hit.transform);
-        }
+        Vector3 newPos = BallBehavior.instance.GetLandingPosition();
+        newPos.y = 0.2f;
+        // shadow.transform.position = BallBehavior.instance.GetLandingPosition(); //hitPosition;
+        shadow.transform.position = newPos; //hitPosition;
     }
 }

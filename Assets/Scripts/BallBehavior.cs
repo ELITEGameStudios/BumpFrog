@@ -50,6 +50,9 @@ public class BallBehavior : MonoBehaviour
         // Hitting Player
         if (collision.collider.CompareTag("Player") && bumpable)
         {
+            // Possesion Switch
+            if (!playerHasPosession) { playerHasPosession = true; timesHit = 1; }
+            else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(false); } }
 
             // Vector3 direction = collision.transform.position.normalized - collision.GetContact(0).point;
             if (collision.collider.gameObject.GetComponent<PlayerMovement>().diving)
@@ -61,15 +64,18 @@ public class BallBehavior : MonoBehaviour
                 BumpBall(collision.transform.position, true);
             }
 
-            // Possesion Switch
-            if (!playerHasPosession) { playerHasPosession = true; timesHit = 1; }
-            else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(false); } }
 
             GameManager.instance.ChangePlayerTarget(!GameManager.instance.second);
         }
         // Hitting Enemy
         else if (collision.collider.CompareTag("Enemy") && bumpable)
         {
+
+            // Possesion Switch
+            if (playerHasPosession) { playerHasPosession = false; timesHit = 1; }
+            else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(true); } }
+
+
             if (timesHit > 2 && !playerHasPosession)
             {
                 Debug.Log("EnemySpike");
@@ -81,9 +87,6 @@ public class BallBehavior : MonoBehaviour
             }
 
 
-            // Possesion Switch
-            if (playerHasPosession) { playerHasPosession = false; timesHit = 1; }
-            else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(true); } }
         }
 
 
@@ -92,7 +95,7 @@ public class BallBehavior : MonoBehaviour
         {
             if (collision.collider.CompareTag("Court"))
             {
-                GameManager.instance.AwardPoint(transform.position.z < 0);
+                GameManager.instance.AwardPoint(transform.position.z > 0);
             }
             else
             {

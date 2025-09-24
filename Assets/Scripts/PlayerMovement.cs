@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-        diveTimer = diveTime;
     }
     
     Vector3 spaceTo3D(Vector2 pos)
@@ -65,13 +64,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.name =="Ground"){
+        if (collision.gameObject.name =="Ground" || collision.gameObject.CompareTag("Court")){
             grounded = true;
         }
     }
     
     void OnCollisionExit(Collision collision){
-        if (collision.gameObject.name =="Ground"){
+        if (collision.gameObject.name =="Ground" || collision.gameObject.CompareTag("Court")){
             grounded = false;
         }
     }

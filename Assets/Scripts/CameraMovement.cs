@@ -8,10 +8,13 @@ public class CameraMovement : MonoBehaviour
     
     // Update is called once per frame
     void Update(){
-        Vector3 direction = (target.position - BallBehavior.instance.transform.position).normalized;
-        Vector3 trueTarget = target.position + (direction * direction.magnitude / 2);
+        if (target != null)
+        {
+            Vector3 direction = (target.position - BallBehavior.instance.transform.position).normalized;
+            Vector3 trueTarget = target.position + (direction * direction.magnitude / 2);
 
-        transform.position = Vector3.Lerp(transform.position, trueTarget, kp) + offset;
+            transform.position = Vector3.Lerp(transform.position, trueTarget, kp) + offset;
+        }
     }
 
     public void ChangeTarget(Transform target){

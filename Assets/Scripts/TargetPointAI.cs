@@ -2,32 +2,40 @@ using UnityEngine;
 
 public class TargetPointAI : MonoBehaviour
 {
+    [SerializeField] Rigidbody rb;
     [SerializeField] bool playerSide;
     [SerializeField] bool secondary;
     public static TargetPointAI playerA, playerB, enemyA, enemyB;
 
-    Vector3 otherPosition, thisPosition, targetPosition;
+    [SerializeField] Vector3 otherPosition, thisPosition, targetPosition;
     Transform targetTf;
 
+    [SerializeField] Vector3 rawDirectionVector;
+
     // Constants
-    public const float spaceWidth = 5;
-    public const float spaceLength = 5;
+    public const float spaceHalfWidth = 7.25f;
+    public const float spaceLength = 7.25f;
     public const float spaceOffset = 5;
     public const float flatZ = 0;
-    
-    float spaceTranslator { get { return playerSide ? 1 : -1; } }
+    public const float maxAiSpeed = 5;
+    public float Kp = 0.8f;
+
+    float spaceTranslator { get { return playerSide ? -1 : 1; } }
 
 
-    public TargetPointAI otherAI { 
+    public TargetPointAI otherAI
+    {
         get
         {
-            if (playerSide){
-                return secondary ? playerA : playerB; 
+            if (playerSide)
+            {
+                return secondary ? playerA : playerB;
             }
-            else{
-                return secondary ? enemyA : enemyB; 
+            else
+            {
+                return secondary ? enemyA : enemyB;
             }
-        } 
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,18 +56,18 @@ public class TargetPointAI : MonoBehaviour
     Vector3 TranslateToSpace(Vector3 worldPos)
     {
         return new Vector3(
-            (worldPos.x - spaceWidth) * spaceTranslator,
+            worldPos.x * spaceTranslator,
             worldPos.y,
-            (worldPos.z - spaceLength) * spaceTranslator
+            (worldPos.z) * spaceTranslator
         );
     }
 
     Vector3 TranslateToWorld(Vector3 spacePos)
     {
         return new Vector3(
-            spacePos.x/spaceTranslator + spaceWidth,
+            spacePos.x / spaceTranslator,
             spacePos.y,
-            spacePos.z/spaceTranslator + spaceLength
+            spacePos.z / spaceTranslator
         );
     }
 
@@ -69,23 +77,43 @@ public class TargetPointAI : MonoBehaviour
     {
         otherPosition = TranslateToSpace(otherAI.transform.position);
         thisPosition = TranslateToSpace(transform.position);
-        
+
         if (targetTf == null) ResolveTarget();
         else targetPosition = TranslateToSpace(targetTf.position);
     }
 
     void ResolveTarget()
     {
-        bool targetIsLeftSide = otherPosition.x >= 0;
-        float availableSpaceX = Mathf.Abs(otherPosition.x) + spaceWidth;
-        float zTarget = (otherPosition.y >= spaceLength / 2) ? spaceLength / 4 : spaceLength * 3 / 4;
-        float xTarget = (spaceWidth - (spaceWidth * 2 - (spaceWidth - Mathf.Abs(otherPosition.x)) / 2)) * (targetIsLeftSide ? -1 : 1);
 
-        targetPosition = new Vector3(
-            xTarget,
-            flatZ,
-            zTarget
+        if (playerSide || TranslateToSpace(BallBehavior.instance.GetLandingPosition()).z < 0)
+        {
+            bool targetIsLeftSide = otherPosition.x >= 0;
+            float availableSpaceX = Mathf.Abs(otherPosition.x) + spaceHalfWidth;
+            float zTarget = (otherPosition.z >= spaceLength / 2) ? spaceLength / 4 : spaceLength * 3 / 4;
+            float xTarget = (spaceHalfWidth - (spaceHalfWidth * 2 - (Mathf.Abs(otherPosition.x)) / 2)) * (targetIsLeftSide ? 1 : -1) / 2;
+
+            targetPosition = new Vector3(
+                xTarget,
+                flatZ,
+                zTarget
+            );
+        }
+        else
+        {
+            targetPosition = TranslateToSpace(BallBehavior.instance.GetLandingPosition());
+            targetPosition.y = 0;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        rawDirectionVector = playerSide ? thisPosition - targetPosition : targetPosition - thisPosition;
+        rawDirectionVector = new Vector3(
+            rawDirectionVector.x,
+            0,
+            rawDirectionVector.z
         );
+        rb.linearVelocity = rawDirectionVector.normalized * Mathf.Clamp(rawDirectionVector.magnitude * Kp, 0, 5);
     }
 
 

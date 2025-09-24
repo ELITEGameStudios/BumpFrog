@@ -11,58 +11,87 @@ public class BallBehavior : MonoBehaviour
     public float spikeForce = 12f;
     public float upwardForce = 5f;
     public float ballGravityScale = 0.5f; //normal = 1   floaty < 1   bouncy > 1
-
-    //player
-    public Transform player;
-    public PlayerMovement playerMovement;
+    public Transform LandingPosTracker;
+    public Vector3 landingPos;
+    public Vector3 linearVelocity;
 
     //bumping
     private bool bumpable = true;
     private float bumpCooldown = 0.2f;
     
     //spiking
-    public float hitRange = 2f;
+    public const float hitRange = 2f;
+    public const float groundPos = 1f;
+    public static BallBehavior instance { get; private set; }
+
+    void Awake()
+    {
+        if (instance == null) { instance = this; }
+        else if(instance != this) { Destroy(gameObject); }
+    }
+    void Start()
+    {
+        BumpBall(Vector3.down);   
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && playerMovement.IsAirborne() && IsCloseToPlayer())
-        {
-            SpikeBall();
-        }
+        landingPos = GetLandingPosition();
     }
 
     void FixedUpdate()
     {
         rb.AddForce(Physics.gravity * (ballGravityScale), ForceMode.Acceleration);
+        linearVelocity = rb.linearVelocity;
     }
+
     
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player") && bumpable)
         {
-            BumpBall();
+            // Vector3 direction = collision.transform.position.normalized - collision.GetContact(0).point;
+            BumpBall(collision.transform.position);
         }
     }
 
-    private void BumpBall()
+    public Vector3 GetLandingPosition()
+    {
+        Vector3 startPos = transform.position;
+        Vector3 simulatedPos = transform.position;
+        Vector3 startVelocity = rb.linearVelocity;
+        float interval = 0.01f;
+
+        for (int i = 0; simulatedPos.y > groundPos; i++)
+        {
+            float gap = interval * i;
+
+            Vector3 simVelocity = (startVelocity + Physics.gravity * ballGravityScale * gap) * gap;
+            simulatedPos = startPos + simVelocity;
+        }
+        LandingPosTracker.position = simulatedPos;
+        return simulatedPos;
+    }
+
+    private void BumpBall(Vector3 playerTf)
     {
         Debug.Log("Bump ball");
-        
+
         bumpable = false;
         Invoke(nameof(BumpReset), bumpCooldown);
-        
-        Vector3 direction = (transform.position - player.position).normalized;
+
+        Vector3 direction = (transform.position - playerTf).normalized;
         direction.y = 0.3f;
 
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction * bumpForce + Vector3.up * upwardForce, ForceMode.Impulse);
     }
 
-    private void SpikeBall()
+    public void SpikeBall(Transform playerTf)
     {
         Debug.Log("Spike ball");
         
-        Vector3 direction = (transform.position - player.position).normalized;
+        Vector3 direction = (transform.position - playerTf.position).normalized;
         direction.y = -0.25f;
         
         rb.linearVelocity = Vector3.zero;
@@ -74,8 +103,5 @@ public class BallBehavior : MonoBehaviour
         bumpable = true;
     }
 
-    private bool IsCloseToPlayer()
-    {
-        return Vector3.Distance(transform.position, player.position) < hitRange;
-    }
+
 }

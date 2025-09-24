@@ -80,4 +80,9 @@ public class InputManager : MonoBehaviour
     public bool GetJump(){
         return jumpInput;
     }
+    
+    public bool GetSpike()
+    {
+        return spikeInput;
+    }
 }

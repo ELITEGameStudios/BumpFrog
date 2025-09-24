@@ -48,14 +48,13 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if (GameManager.instance != null)
-        {
-            if (GameManager.instance.paused)
-            {
-                s.source.pitch *= 0.5f;
-            }
-            
-        }
+        //if (GameManager.instance != null)
+        //{
+        //    if (GameManager.instance.paused)
+        //    {
+        //        s.source.pitch *= 0.5f;
+        //    }
+        //}
         s.source.Play();
     }
 

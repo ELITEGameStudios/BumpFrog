@@ -8,6 +8,7 @@ TagManager:
   - Net
   - Ground
   - Court
+  - Net
   layers:
   - Default
   - TransparentFX

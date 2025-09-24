@@ -12,8 +12,11 @@ public class BallBehavior : MonoBehaviour
     public float upwardForce = 5f;
     public float ballGravityScale = 0.5f; //normal = 1   floaty < 1   bouncy > 1
     public Transform LandingPosTracker;
+    public Enemy closestEnemy;
     public Vector3 landingPos;
     public Vector3 linearVelocity;
+    public bool playerHasPosession;
+    public int timesHit;
 
     //bumping
     private bool bumpable = true;
@@ -28,10 +31,6 @@ public class BallBehavior : MonoBehaviour
     {
         if (instance == null) { instance = this; }
         else if(instance != this) { Destroy(gameObject); }
-    }
-    void Start()
-    {
-        BumpBall(Vector3.down);   
     }
 
     void Update()
@@ -48,10 +47,57 @@ public class BallBehavior : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
+        // Hitting Player
         if (collision.collider.CompareTag("Player") && bumpable)
         {
+
             // Vector3 direction = collision.transform.position.normalized - collision.GetContact(0).point;
-            BumpBall(collision.transform.position);
+            if (collision.collider.gameObject.GetComponent<PlayerMovement>().diving)
+            {
+                SpikeBall(collision.transform, true);
+            }
+            else
+            {
+                BumpBall(collision.transform.position, true);
+            }
+
+            // Possesion Switch
+            if (!playerHasPosession) { playerHasPosession = true; timesHit = 1; }
+            else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(false); } }
+
+            GameManager.instance.ChangePlayerTarget(!GameManager.instance.second);
+        }
+        // Hitting Enemy
+        else if (collision.collider.CompareTag("Enemy") && bumpable)
+        {
+            if (timesHit > 2 && !playerHasPosession)
+            {
+                Debug.Log("EnemySpike");
+                SpikeBall(collision.transform, false);
+            }
+            else
+            {
+                BumpBall(collision.transform.position, false);
+            }
+
+
+            // Possesion Switch
+            if (playerHasPosession) { playerHasPosession = false; timesHit = 1; }
+            else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(true); } }
+        }
+
+
+        // Hitting any obstacle
+        else if (collision.collider.CompareTag("Ground") || collision.collider.CompareTag("Court") || collision.collider.CompareTag("Net"))
+        {
+            if (collision.collider.CompareTag("Court"))
+            {
+                GameManager.instance.AwardPoint(transform.position.z < 0);
+            }
+            else
+            {
+                GameManager.instance.AwardPoint(!playerHasPosession);
+            }
         }
     }
 
@@ -73,7 +119,28 @@ public class BallBehavior : MonoBehaviour
         return simulatedPos;
     }
 
-    private void BumpBall(Vector3 playerTf)
+    public Enemy ClosestEnemy()
+    {
+        Enemy closestCandadite = GameManager.instance.enemies[0];
+        float closestDistance = Vector3.Distance(transform.position, closestCandadite.transform.position);
+
+        for (int i = 0; i < GameManager.instance.enemies.Length; i++)
+        {
+            Enemy candadite = GameManager.instance.enemies[i];
+            float distance = Vector3.Distance(transform.position, candadite.transform.position);
+            if (distance < closestDistance)
+            {
+                closestCandadite = candadite;
+                closestDistance = distance;
+            }
+        }
+
+        closestEnemy = closestCandadite;
+
+        return closestCandadite;
+    }
+
+    public void BumpBall(Vector3 playerTf, bool byPlayer)
     {
         Debug.Log("Bump ball");
 
@@ -81,19 +148,38 @@ public class BallBehavior : MonoBehaviour
         Invoke(nameof(BumpReset), bumpCooldown);
 
         Vector3 direction = (transform.position - playerTf).normalized;
-        direction.y = 0.3f;
+        if (direction.y < 0.5f){
+            direction.y = 0.5f;
+        }
+        direction.z = Mathf.Abs(direction.z) * (byPlayer ? 1 : -1);
+        direction.Normalize();
+
+        if (!byPlayer)
+        {
+            float maxAngle = 30;
+            float margin = Mathf.Cos(maxAngle * Mathf.Deg2Rad);
+            direction.x = Mathf.Clamp(direction.x, -margin, margin);
+        }
 
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction * bumpForce + Vector3.up * upwardForce, ForceMode.Impulse);
     }
 
-    public void SpikeBall(Transform playerTf)
+    public void SpikeBall(Transform playerTf, bool byPlayer)
     {
         Debug.Log("Spike ball");
         
         Vector3 direction = (transform.position - playerTf.position).normalized;
-        direction.y = -0.25f;
-        
+        direction.y = 0f;
+        direction.z = Mathf.Abs(direction.z) * (byPlayer ? 1 : -1);
+        direction.Normalize();
+
+        float maxAngle = 30;
+        float margin = Mathf.Cos(maxAngle * Mathf.Deg2Rad);
+        direction.x = Mathf.Clamp(direction.x, -margin, margin);
+        Debug.Log(direction.x); // dont need to normalize since this remains within the bounds
+        direction.Normalize();
+
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction * spikeForce, ForceMode.Impulse);
     }

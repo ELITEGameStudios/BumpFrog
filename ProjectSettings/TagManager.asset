@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Enemy
+  - Net
+  - Ground
+  - Court
   layers:
   - Default
   - TransparentFX

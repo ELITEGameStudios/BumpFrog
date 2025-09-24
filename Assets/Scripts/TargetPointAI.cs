@@ -5,6 +5,7 @@ public class TargetPointAI : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] bool playerSide;
     [SerializeField] bool secondary;
+    [SerializeField] bool grounded;
     public static TargetPointAI playerA, playerB, enemyA, enemyB;
 
     [SerializeField] Vector3 otherPosition, thisPosition, targetPosition;
@@ -85,7 +86,7 @@ public class TargetPointAI : MonoBehaviour
     void ResolveTarget()
     {
 
-        if (playerSide || TranslateToSpace(BallBehavior.instance.GetLandingPosition()).z < 0)
+        if (playerSide || (TranslateToSpace(BallBehavior.instance.GetLandingPosition()).z < 0))// && BallBehavior.instance.ClosestEnemy().targetAI == this))
         {
             bool targetIsLeftSide = otherPosition.x >= 0;
             float availableSpaceX = Mathf.Abs(otherPosition.x) + spaceHalfWidth;
@@ -100,7 +101,7 @@ public class TargetPointAI : MonoBehaviour
         }
         else
         {
-            targetPosition = TranslateToSpace(BallBehavior.instance.GetLandingPosition());
+            targetPosition = TranslateToSpace(BallBehavior.instance.GetLandingPosition()) + Vector3.forward *0.5f;
             targetPosition.y = 0;
         }
     }
@@ -113,9 +114,35 @@ public class TargetPointAI : MonoBehaviour
             0,
             rawDirectionVector.z
         );
-        rb.linearVelocity = rawDirectionVector.normalized * Mathf.Clamp(rawDirectionVector.magnitude * Kp, 0, 5);
+
+
+        if (grounded)
+        {
+            if (!playerSide)
+            {
+                if (Vector3.Distance(BallBehavior.instance.transform.position, transform.position) <= 1f && grounded)
+                { Jump(); return; }
+            }
+
+            rb.linearVelocity = rawDirectionVector.normalized * Mathf.Clamp(rawDirectionVector.magnitude * Kp, 0, 5);
+        }
+    }
+    void Jump()
+    {
+        rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+        // diveTimer = diveTime;
     }
 
-
+    void OnCollisionEnter(Collision collision){
+        if (collision.gameObject.name =="Ground" || collision.gameObject.CompareTag("Court")){
+            grounded = true;
+        }
+    }
+    
+    void OnCollisionExit(Collision collision){
+        if (collision.gameObject.name =="Ground" || collision.gameObject.CompareTag("Court")){
+            grounded = false;
+        }
+    }
     
 }

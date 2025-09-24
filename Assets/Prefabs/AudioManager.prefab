@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6432643431561802921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496968166691403668}
+  - component: {fileID: 6043594473223128841}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496968166691403668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432643431561802921}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6043594473223128841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432643431561802921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc77eaf955fd34468a18d4969f0f102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Main Theme
+    clip: {fileID: 8300000, guid: 17c737b0ec4e26949b3095267f1f0361, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Win Theme
+    clip: {fileID: 8300000, guid: de4ea8a7b0bafbb428a033d73206b99d, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Lose Theme
+    clip: {fileID: 8300000, guid: 84d67d5907d7f5f4fb297d16908c8259, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Game Start Whistle
+    clip: {fileID: 8300000, guid: da88872f4dcf76e40a7adb42aca977f7, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Game Start Whistle
+    clip: {fileID: 8300000, guid: da88872f4dcf76e40a7adb42aca977f7, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Point Scored Whistle
+    clip: {fileID: 8300000, guid: 4d10829cdca03a3419fc60f2c611eddd, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Game Over Whistle
+    clip: {fileID: 8300000, guid: 3560b1f4e8de62e48834a29d372b4224, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bump 1
+    clip: {fileID: 8300000, guid: cf0cef06d96be154b846218d14ab5db9, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bump 2
+    clip: {fileID: 8300000, guid: 24dbd6732e2cfc046887ee87351f6ac8, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bump 3
+    clip: {fileID: 8300000, guid: f7c1d80cf8625644c8d766fe93dbaf42, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 964068dbab7d8b546bd15e1e5432694a, type: 3}
+    volume: 0.35
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hits Ground
+    clip: {fileID: 8300000, guid: f47bd415a24a2184fa5e2fc97adc2003, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hits Ground Spike
+    clip: {fileID: 8300000, guid: cfe4c6f9a8ba42744b1c378d85c14b43, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hits Net
+    clip: {fileID: 8300000, guid: cf262f35cbfd88a49ad6426f4129af70, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hits Post
+    clip: {fileID: 8300000, guid: 002068af24b2b5d4a82f3ebf82181bcd, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Spike Whiff
+    clip: {fileID: 8300000, guid: 002068af24b2b5d4a82f3ebf82181bcd, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Buttons
+    clip: {fileID: 8300000, guid: a857fe1d06654c94094324e71c899cff, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

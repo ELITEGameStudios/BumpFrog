@@ -72,7 +72,7 @@ public class BallBehavior : MonoBehaviour
             }
 
 
-            GameManager.instance.ChangePlayerTarget(!GameManager.instance.second);
+            //GameManager.instance.ChangePlayerTarget(!GameManager.instance.second);
         }
         // Hitting Enemy
         else if (collision.collider.CompareTag("Enemy") && bumpable)

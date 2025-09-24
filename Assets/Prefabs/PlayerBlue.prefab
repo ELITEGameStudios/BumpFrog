@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1985095098103454035}
   - component: {fileID: 896994903120444001}
   - component: {fileID: 6576869634865784554}
-  m_Layer: 0
+  - component: {fileID: 7778894327311964044}
+  m_Layer: 7
   m_Name: PlayerBlue
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +56,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -66,13 +67,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7104692279841457532}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62be9aa72256dea4e8209b3b67e140ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 896994903120444001}
-  speed: 2
+  speed: 5
   jumpSpeed: 14
   diveVelocity: 7
   diveTime: 1
@@ -119,6 +120,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 1985095098103454035}
+  ai: {fileID: 7778894327311964044}
+  ballCloseToPlayer: 0
+--- !u!114 &7778894327311964044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7104692279841457532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ba4cbdb27e3d74482f634d29af0807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 896994903120444001}
+  playerSide: 0
+  secondary: 0
+  rawDirectionVector: {x: 0, y: 0, z: 0}
 --- !u!1001 &8685967306111632623
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -24,10 +24,14 @@ public class BallBehavior : MonoBehaviour
     public const float groundPos = 1f;
     public static BallBehavior instance { get; private set; }
 
+    AudioManager audioManager;
+    
     void Awake()
     {
         if (instance == null) { instance = this; }
         else if(instance != this) { Destroy(gameObject); }
+
+        audioManager = FindObjectOfType<AudioManager>();
     }
     void Start()
     {
@@ -53,6 +57,12 @@ public class BallBehavior : MonoBehaviour
             // Vector3 direction = collision.transform.position.normalized - collision.GetContact(0).point;
             BumpBall(collision.transform.position);
         }
+        
+        if(collision.collider.CompareTag("Ground"))
+            audioManager.Play("Hits Ground");
+        
+        if(collision.collider.CompareTag("Net"))
+            audioManager.Play("Hits Net");
     }
 
     public Vector3 GetLandingPosition()
@@ -85,6 +95,20 @@ public class BallBehavior : MonoBehaviour
 
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction * bumpForce + Vector3.up * upwardForce, ForceMode.Impulse);
+        
+        int random = Random.Range(0, 3);
+        if(random == 0)
+        {
+            audioManager.Play("Bump 1");
+        }
+        else if(random == 1)
+        {
+            audioManager.Play("Bump 2");
+        }
+        else
+        {
+            audioManager.Play("Bump 3");
+        }
     }
 
     public void SpikeBall(Transform playerTf)
@@ -96,6 +120,8 @@ public class BallBehavior : MonoBehaviour
         
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction * spikeForce, ForceMode.Impulse);
+        
+        audioManager.Play("Spike Whiff");
     }
 
     private void BumpReset()

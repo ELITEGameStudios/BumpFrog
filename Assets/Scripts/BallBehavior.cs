@@ -26,6 +26,7 @@ public class BallBehavior : MonoBehaviour
     public const float hitRange = 2f;
     public const float groundPos = 1f;
     public static BallBehavior instance { get; private set; }
+    [SerializeField] GameObject spikeParticles;
 
     AudioManager audioManager;
     
@@ -44,6 +45,8 @@ public class BallBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.instance.paused) return;
+
         rb.AddForce(Physics.gravity * (ballGravityScale), ForceMode.Acceleration);
         linearVelocity = rb.linearVelocity;
     }
@@ -80,7 +83,7 @@ public class BallBehavior : MonoBehaviour
             else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(true); } }
 
 
-            if (timesHit > 2 && !playerHasPosession)
+            if (timesHit >= 2 && !playerHasPosession)
             {
                 Debug.Log("EnemySpike");
                 SpikeBall(collision.transform, false);
@@ -112,6 +115,11 @@ public class BallBehavior : MonoBehaviour
         
         if(collision.collider.CompareTag("Net"))
             audioManager.Play("Hits Net");
+    }
+
+    void DisableParticles()
+    {
+        spikeParticles.SetActive(false);
     }
 
     public Vector3 GetLandingPosition()
@@ -156,6 +164,7 @@ public class BallBehavior : MonoBehaviour
     public void BumpBall(Vector3 playerTf, bool byPlayer)
     {
         Debug.Log("Bump ball");
+        if (spikeParticles.activeInHierarchy) spikeParticles.SetActive(false);
 
         bumpable = false;
         Invoke(nameof(BumpReset), bumpCooldown);
@@ -197,18 +206,20 @@ public class BallBehavior : MonoBehaviour
         Debug.Log("Spike ball");
         
         Vector3 direction = (transform.position - playerTf.position).normalized;
-        direction.y = 0f;
+        direction.y = byPlayer ? -0.25f : 0f;
         direction.z = Mathf.Abs(direction.z) * (byPlayer ? 1 : -1);
         direction.Normalize();
 
         float maxAngle = 30;
         float margin = Mathf.Cos(maxAngle * Mathf.Deg2Rad);
-        direction.x = Mathf.Clamp(direction.x, -margin, margin);
+        direction.x = byPlayer ? Mathf.Clamp(direction.x, -margin, margin) : 0;
         Debug.Log(direction.x); // dont need to normalize since this remains within the bounds
         direction.Normalize();
 
         rb.linearVelocity = Vector3.zero;
         rb.AddForce(direction * spikeForce, ForceMode.Impulse);
+
+        spikeParticles.SetActive(true);
         
         audioManager.Play("Spike Whiff");
     }

@@ -17,15 +17,14 @@ public class InputManager : MonoBehaviour
     [SerializeField] private bool diveInput;
     
     [Header("Functional Inputs")]
-    [SerializeField] private bool spikeInput;
-    [SerializeField] private bool bumpInput;
+    [SerializeField] private bool switchInput;
     [SerializeField] private bool startInput;
     
     
     [Header("Bind Settings")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode diveKey = KeyCode.Mouse1;
-    [SerializeField] private KeyCode spikeKey = KeyCode.Mouse0;
+    [SerializeField] private KeyCode switchKey = KeyCode.Mouse0;
     [SerializeField] private KeyCode bumpKey = KeyCode.Mouse0;
     // [SerializeField] private KeyCode startKey = KeyCode.KeypadEnter;
 
@@ -53,9 +52,8 @@ public class InputManager : MonoBehaviour
 
                 jumpInput = Input.GetKey(jumpKey);
                 diveInput = Input.GetKey(diveKey);
-                spikeInput = Input.GetKey(spikeKey);
-                bumpInput = Input.GetKey(bumpKey);
-                startInput = Input.anyKey;
+                switchInput = Input.GetKeyDown(switchKey);
+                startInput = Input.anyKeyDown;
 
                 return;
             
@@ -84,9 +82,9 @@ public class InputManager : MonoBehaviour
         return jumpInput;
     }
     
-    public bool GetSpike()
+    public bool GetSwitch()
     {
-        return spikeInput;
+        return switchInput;
     }
 
     public bool GetStart()

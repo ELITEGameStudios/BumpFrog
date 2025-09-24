@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     public bool second = false;
     bool started = false;
+    public bool paused = false;
 
 
-    public int playerPoints, enemyPoints;
+    public int playerPoints, enemyPoints, maxPoints = 7;
     public TMP_Text playerPointText, enemyPointText;
     public Transform ballStartPosition;
 
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
         if (toPlayer)
         {
             playerPoints++;
-            if (playerPoints >= 5)
+            if (playerPoints >= maxPoints)
             {
                 PlayWinSequence(true);
                 return;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
         else
         {
             enemyPoints++;
-            if (enemyPoints >= 5)
+            if (enemyPoints >= maxPoints)
             {
                 PlayWinSequence(false);
                 return;
@@ -57,9 +58,14 @@ public class GameManager : MonoBehaviour
         
         PlayRestartSequence();
         
-    }   
+    }
 
-    void PlayWinSequence(bool players) {
+    void PlayWinSequence(bool players)
+    {
+        playerPointText.text = maxPoints.ToString();
+        enemyPointText.text = maxPoints.ToString();
+        
+        AudioManager.instance.Play(players? "Win Theme" : "Lose Theme");
 
     }
 
@@ -81,10 +87,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Y))
-        // {
-        //     ChangePlayerTarget(!second);
-        // }
+        if (InputManager.instance.GetSwitch())
+        {
+            ChangePlayerTarget(!second);
+        }
 
         if (InputManager.instance.GetStart() && !started)
         {

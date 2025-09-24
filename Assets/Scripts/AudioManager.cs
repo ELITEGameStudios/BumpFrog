@@ -13,12 +13,12 @@ public class AudioManager : MonoBehaviour
     
     void Awake()
     {
-        if (instance == null)
+        if (instance == null) {
             instance = this;
-        else
+        }
+        else if(instance != this)
         {
             Destroy(gameObject);
-            return;       
         }
         
         DontDestroyOnLoad(gameObject);
@@ -48,11 +48,14 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if (PauseMenu.GameIsPaused)
+        if (GameManager.instance != null)
         {
-            s.source.pitch *= 0.5f;
+            if (GameManager.instance.paused)
+            {
+                s.source.pitch *= 0.5f;
+            }
+            
         }
-        
         s.source.Play();
     }
 

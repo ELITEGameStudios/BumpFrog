@@ -113,7 +113,9 @@ public class GameManager : MonoBehaviour
         if (InputManager.instance.GetStart() && !started)
         {
             Time.timeScale = 1;
-            BallBehavior.instance.BumpBall(BallBehavior.instance.transform.position + Vector3.down, true);   
+            // BallBehavior.instance.BumpBall(BallBehavior.instance.transform.position + Vector3.down, true);   
+            BallBehavior.instance.rb.linearVelocity = Vector3.up * 8;
+            AudioManager.instance.Play("Bump 1");   
             started = true;
         }
     }

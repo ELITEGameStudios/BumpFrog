@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour
     public float diveVelocity, diveTime, diveTimer;
     public bool grounded, canMoveInAir;
     public bool diving { get { return diveTimer > 0; } }
+    public bool canMove { get { return (grounded || canMoveInAir) && !diving; } }
+    public bool canJump { get { return grounded && !diving; } }
+
+    // public GameObject 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!diving)
         {
-            if (grounded || canMoveInAir){
+            if (canMove){
                 rb.linearVelocity = speed * spaceTo3D(InputManager.instance.GetMovement());
             }
 

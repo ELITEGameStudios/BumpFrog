@@ -89,6 +89,6 @@ public class InputManager : MonoBehaviour
 
     public bool GetStart()
     {
-        return startInput;
+        return startInput && !Input.GetKeyDown(KeyCode.Escape);
     }
 }

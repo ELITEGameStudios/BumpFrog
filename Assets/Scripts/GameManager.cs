@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         if (toPlayer)
         {
             playerPoints++;
+            playerPointText.text = playerPoints.ToString();
             if (playerPoints >= maxPoints)
             {
                 PlayWinSequence(true);
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         else
         {
             enemyPoints++;
+            enemyPointText.text = enemyPoints.ToString();
             if (enemyPoints >= maxPoints)
             {
                 PlayWinSequence(false);
@@ -80,16 +82,14 @@ public class GameManager : MonoBehaviour
         loseText.SetActive(!players);
         loseImage.SetActive(!players);
 
-        playerPointText.text = maxPoints.ToString();
-        enemyPointText.text = maxPoints.ToString();
+        // playerPointText.text = maxPoints.ToString();
+        // enemyPointText.text = maxPoints.ToString();
         
         AudioManager.instance.Play(players? "Win Theme" : "Lose Theme");
     }
 
     void PlayRestartSequence()
     {
-        playerPointText.text = playerPoints.ToString();
-        enemyPointText.text = enemyPoints.ToString();
 
         Time.timeScale = 0f;
         started = false;

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rb;
+    public Animator animator;
     public float speed = 5;
     public float jumpSpeed = 5;
     public float diveVelocity, diveTime, diveTimer;
@@ -21,7 +22,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (diving){ diveTimer -= Time.deltaTime; }
+        if (diving) { diveTimer -= Time.deltaTime; }
+        animator.SetFloat("speed", rb.linearVelocity.magnitude/3);
+        animator.SetBool("canMove", canMove);
     }
 
     // Update is called once per frame
@@ -51,11 +54,14 @@ public class PlayerMovement : MonoBehaviour
             spaceTo3D(InputManager.instance.GetMovement().normalized) * diveVelocity
             + Vector3.up * jumpSpeed / 3;
         diveTimer = diveTime;
+        
     }
 
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+        animator.SetTrigger("Jump");
+
     }
     
     Vector3 spaceTo3D(Vector2 pos)

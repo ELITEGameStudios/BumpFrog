@@ -65,10 +65,12 @@ public class BallBehavior : MonoBehaviour
             if (collision.collider.gameObject.GetComponent<PlayerMovement>().diving)
             {
                 SpikeBall(collision.transform, true);
+                GameManager.instance.GetCurrentPlayer().movement.animator.SetTrigger("Spike");
             }
             else
             {
                 BumpBall(collision.transform.position, true);
+                GameManager.instance.GetCurrentPlayer().movement.animator.SetTrigger("Bump");
             }
 
 
@@ -87,10 +89,12 @@ public class BallBehavior : MonoBehaviour
             {
                 Debug.Log("EnemySpike");
                 SpikeBall(collision.transform, false);
+                GameManager.instance.enemies[0].animator.SetTrigger("Spike");
             }
             else
             {
                 BumpBall(collision.transform.position, false);
+                GameManager.instance.enemies[0].animator.SetTrigger("Bump");
             }
 
 

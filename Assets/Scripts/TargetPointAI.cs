@@ -7,6 +7,7 @@ public class TargetPointAI : MonoBehaviour
     [SerializeField] bool secondary;
     [SerializeField] bool grounded;
     public static TargetPointAI enemy;
+    public Animator animator;
 
     [SerializeField] Vector3 otherPosition, thisPosition, targetPosition;
     Transform targetTf;
@@ -66,6 +67,9 @@ public class TargetPointAI : MonoBehaviour
 
         if (targetTf == null) ResolveTarget();
         else targetPosition = TranslateToSpace(targetTf.position);
+        animator.speed = rb.linearVelocity.magnitude;
+        animator.SetBool("canMove", grounded);
+        
     }
 
     void ResolveTarget()

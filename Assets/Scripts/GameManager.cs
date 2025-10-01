@@ -1,9 +1,10 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Player currentPlayer, mainPlayer, secondPlayer;
+    [SerializeField] Player currentPlayer;
     public Enemy[] enemies;
     [SerializeField] CameraMovement cam;
     public static GameManager instance { get; private set; }
@@ -16,21 +17,23 @@ public class GameManager : MonoBehaviour
     public TMP_Text playerPointText, enemyPointText;
     public Transform ballStartPosition;
 
+    public GameObject winScreen, winText, loseText;
+    public GameObject winImage, loseImage;
+
     public void ChangePlayerTarget(bool second)
     {
         this.second = second;
 
-        if (currentPlayer != null)
-        {
-            currentPlayer.movement.enabled = false;
-            currentPlayer.ai.enabled = true;
-        }
+        // if (currentPlayer != null)
+        // {
+        //     currentPlayer.movement.enabled = false;
+        //     currentPlayer.ai.enabled = true;
+        // }
 
-        currentPlayer = second ? secondPlayer : mainPlayer;
+        // currentPlayer = second ? secondPlayer : mainPlayer;
 
         currentPlayer.movement.enabled = true;
         currentPlayer.ai.enabled = false;
-
         cam.ChangeTarget(currentPlayer.transform);
     }
 
@@ -60,13 +63,27 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+
     void PlayWinSequence(bool players)
     {
+        Time.timeScale = 0;
+        winScreen.SetActive(true);
+
+        winText.SetActive(players);
+        winImage.SetActive(players);
+
+        loseText.SetActive(!players);
+        loseImage.SetActive(!players);
+
         playerPointText.text = maxPoints.ToString();
         enemyPointText.text = maxPoints.ToString();
         
         AudioManager.instance.Play(players? "Win Theme" : "Lose Theme");
-
     }
 
     void PlayRestartSequence()
@@ -78,8 +95,9 @@ public class GameManager : MonoBehaviour
         started = false;
         ChangePlayerTarget(false);
 
-        mainPlayer.Reset();
-        secondPlayer.Reset();
+        currentPlayer.Reset();
+        // mainPlayer.Reset();
+        // secondPlayer.Reset();
         BallBehavior.instance.transform.position = ballStartPosition.position;
         BallBehavior.instance.rb.linearVelocity = Vector3.zero;
         foreach (Enemy enemy in enemies) enemy.Reset();

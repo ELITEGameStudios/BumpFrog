@@ -58,8 +58,8 @@ public class BallBehavior : MonoBehaviour
         if (collision.collider.CompareTag("Player") && bumpable)
         {
             // Possesion Switch
-            if (!playerHasPosession) { playerHasPosession = true; timesHit = 1; }
-            else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(false); } }
+            // if (!playerHasPosession) { playerHasPosession = true; timesHit = 1; }
+            // else { timesHit++; if (timesHit > 3) { GameManager.instance.AwardPoint(false); } }
 
             // Vector3 direction = collision.transform.position.normalized - collision.GetContact(0).point;
             if (collision.collider.gameObject.GetComponent<PlayerMovement>().diving)

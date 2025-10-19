@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject winScreen, winText, loseText;
     public GameObject winImage, loseImage;
+    public GameState gameState;
+
+    public DialogueStringScript stringScript;
 
     public void ChangePlayerTarget(bool second)
     {
@@ -43,26 +46,31 @@ public class GameManager : MonoBehaviour
         {
             playerPoints++;
             playerPointText.text = playerPoints.ToString();
+
             if (playerPoints >= maxPoints)
             {
                 PlayWinSequence(true);
                 return;
             }
+
+            stringScript.BeginDialogueTree(Dialogue.winTrees[playerPoints-1]);
         }
         else
         {
             enemyPoints++;
             enemyPointText.text = enemyPoints.ToString();
+
             if (enemyPoints >= maxPoints)
             {
                 PlayWinSequence(false);
                 return;
             }
+            
+            stringScript.BeginDialogueTree(Dialogue.loseTrees[enemyPoints-1]);
         }
 
-        
-        PlayRestartSequence();
-        
+
+        PlayRestartSequence();        
     }
 
     public void PlayGame()
@@ -100,7 +108,9 @@ public class GameManager : MonoBehaviour
         // secondPlayer.Reset();
         BallBehavior.instance.transform.position = ballStartPosition.position;
         BallBehavior.instance.rb.linearVelocity = Vector3.zero;
+        BallBehavior.instance.bumpable = false;
         foreach (Enemy enemy in enemies) enemy.Reset();
+        
     }
 
     void Update()
@@ -110,14 +120,23 @@ public class GameManager : MonoBehaviour
             ChangePlayerTarget(!second);
         }
 
-        if (InputManager.instance.GetStart() && !started)
+        if (InputManager.instance.GetStart() && !started && gameState == GameState.PRERALLY)
         {
             Time.timeScale = 1;
             // BallBehavior.instance.BumpBall(BallBehavior.instance.transform.position + Vector3.down, true);   
             BallBehavior.instance.rb.linearVelocity = Vector3.up * 8;
-            AudioManager.instance.Play("Bump 1");   
+            BallBehavior.instance.bumpable = true;
+
+            AudioManager.instance.Play("Bump 1");
             started = true;
+            gameState = GameState.RALLY;
         }
+        
+        // if(gameState != GameState.RALLY){
+        //     BallBehavior.instance.transform.position = ballStartPosition.position;
+        //     BallBehavior.instance.bumpable = false;
+            
+        // }
     }
 
     void Awake()
@@ -126,7 +145,16 @@ public class GameManager : MonoBehaviour
         else if (instance != this) { Destroy(this); }
 
         PlayRestartSequence();
-    }  
-    
+        gameState = GameState.PRERALLY;
+    }
+
     public Player GetCurrentPlayer() { return currentPlayer; }
+
+    public enum GameState
+    {
+        DIALOGUE,
+        PRERALLY,
+        RALLY,
+        POSTRALLY
+    }
 }

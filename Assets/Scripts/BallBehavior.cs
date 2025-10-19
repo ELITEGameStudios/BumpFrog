@@ -19,7 +19,7 @@ public class BallBehavior : MonoBehaviour
     public int timesHit;
 
     //bumping
-    private bool bumpable = true;
+    public bool bumpable = true;
     private float bumpCooldown = 0.2f;
     
     //spiking

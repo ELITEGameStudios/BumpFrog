@@ -434,7 +434,7 @@ public static class Dialogue
                 },
                 new Monologue[]{ // Option 2 responses
                     new ("LILY: OMG!!11??1 Enemies to lovers??", QuoteImage.LILYFlatteredImage, 10),
-                    new ("JEQUEVONTE: Hell nah...", QuoteImage.JEQUEVONTEUpsetImage)
+                    new ("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 3 responses
                     new ("JEQUEVONTE: sure...", QuoteImage.JEQUEVONTEIdleImage),

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: WinIntro
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Rival
+    dialogueText: Hey great game out there playa!
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 1
+    rivalEmoticon: {fileID: 21300000, guid: 3da4f74cb34ab0245b3f5799abdf408d, type: 3}
+    rivalPosition: 1
+    hasChoices: 1
+    choices:
+    - choiceText: That was close
+      nextDialogue: {fileID: 11400000, guid: 671c84c61166c5f4da2dbe506ec4fd9a, type: 2}
+    - choiceText: Yeah great game
+      nextDialogue: {fileID: 11400000, guid: 85e2ddb17f8a3bb4c9165a89d91c9869, type: 2}
+    - choiceText: I destroyed you
+      nextDialogue: {fileID: 11400000, guid: fa9504376b15f4b469f9ec901dc53f07, type: 2}
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 0}
+  eventType: 0

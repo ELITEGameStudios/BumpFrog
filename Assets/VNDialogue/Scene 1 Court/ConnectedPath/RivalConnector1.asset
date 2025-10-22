@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: RivalConnector1
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Rival
+    dialogueText: Oh bummer, I wont force yah but my family does miss you. See you
+      later then.
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 1
+    rivalEmoticon: {fileID: 21300000, guid: dafa8f4e5cf0de643b10ce4555a4440c, type: 3}
+    rivalPosition: 2
+    hasChoices: 1
+    choices:
+    - choiceText: Cya Later!
+      nextDialogue: {fileID: 11400000, guid: 4e81f94ed43fafa4484a8fc0418d8f3d, type: 2}
+    - choiceText: Mew and Leave
+      nextDialogue: {fileID: 11400000, guid: 488d5cc15923af1439e68de55d52d023, type: 2}
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 11400000, guid: eb76cb3aef1217c43a192650e2de2236, type: 2}
+  eventType: 0

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: ImSorry
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Player
+    dialogueText: Im really sorry....
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: 3ea7d463e7f89db458f460937c53a5a3, type: 3}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: No.... I am. Sorry I wasn't enough
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 21300000, guid: dafa8f4e5cf0de643b10ce4555a4440c, type: 3}
+    rivalPosition: 4
+    hasChoices: 1
+    choices:
+    - choiceText: You could never compete
+      nextDialogue: {fileID: 11400000, guid: fc04143fa4e8c144abf0369b755c1493, type: 2}
+    - choiceText: No don't leave!
+      nextDialogue: {fileID: 11400000, guid: 57160748844fb614697542d313a79c2a, type: 2}
+    - choiceText: Its my fauly!
+      nextDialogue: {fileID: 11400000, guid: da910e64d4e0265499ae42b52e5b5291, type: 2}
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 11400000, guid: 1873fda58948da64f8c6ceac7b581b74, type: 2}
+  eventType: 0

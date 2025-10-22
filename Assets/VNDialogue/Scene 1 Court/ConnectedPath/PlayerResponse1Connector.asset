@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: PlayerResponse1Connector
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Player
+    dialogueText: Yeah for sure we can get the run back
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: 1a61bb50f218c1541876c82d272ab253, type: 3}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: My cousin came back from the kitchen the other minute with some
+      expired fruit, you should come over they loved having you around last time.
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 2
+    rivalEmoticon: {fileID: 21300000, guid: 3da4f74cb34ab0245b3f5799abdf408d, type: 3}
+    rivalPosition: 1
+    hasChoices: 1
+    choices:
+    - choiceText: Already got plans
+      nextDialogue: {fileID: 11400000, guid: 0482d43c2fcd046439b4eb9d44e4784d, type: 2}
+    - choiceText: Feeling under the weather
+      nextDialogue: {fileID: 11400000, guid: c7a178bd18df6b14fb14f73f66a489bd, type: 2}
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 0}
+  eventType: 0
+  targetCameraID: 0

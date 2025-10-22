@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: You are my friend
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Player
+    dialogueText: You.... are my friend
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: 3ea7d463e7f89db458f460937c53a5a3, type: 3}
+    playerPosition: 3
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: Then why lie to my face
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 3
+    rivalEmoticon: {fileID: 21300000, guid: 49da193140fc33942be1ee50e3e4cecc, type: 3}
+    rivalPosition: 3
+    hasChoices: 0
+    choices: []
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 0}
+  eventType: 3
+  targetCameraID: 0

@@ -183,7 +183,7 @@ public class VNDialogueManager : MonoBehaviour
             _ => null
         };
     }
-    
+
     void EndDialogue()
     {
         nameText.text = "";
@@ -195,16 +195,8 @@ public class VNDialogueManager : MonoBehaviour
 
         if (nextButton != null)
             nextButton.interactable = false;
-        
-        if (dialogueObject.continueToNextDialogue && dialogueObject.nextDialogue != null)
-        {
-            dialogueObject = dialogueObject.nextDialogue;
-            currentLineIndex = 0;
-            nextButton.interactable = true;
-            DisplayNextLine();
-            return;
-        }
-        
+
+        // Trigger post-dialogue events if needed
         if (dialogueObject != null)
         {
             VNEventManager eventManager = FindFirstObjectByType<VNEventManager>();
@@ -213,14 +205,23 @@ public class VNDialogueManager : MonoBehaviour
                 switch (dialogueObject.eventType)
                 {
                     case VNEventType.FadeAndTeleport:
-                        eventManager.FadeOutAndChangeCamera();
+                        eventManager.FadeOutAndChangeCamera(dialogueObject.targetCameraID);
                         break;
-                    //case VNEventType.PlayCutscene:
-                        //eventManager.PlayCutscene();
+                    case VNEventType.RivalCaught:
+                        eventManager.RivalCaught();
                         break;
-                    // Add others as needed
                 }
             }
+        }
+        
+        // Continue chain if another dialogue is linked
+        if (dialogueObject.continueToNextDialogue && dialogueObject.nextDialogue != null)
+        {
+            dialogueObject = dialogueObject.nextDialogue;
+            currentLineIndex = 0;
+            nextButton.interactable = true;
+            DisplayNextLine();
+            return;
         }
     }
 }

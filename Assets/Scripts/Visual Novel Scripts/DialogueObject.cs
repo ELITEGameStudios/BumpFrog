@@ -6,6 +6,7 @@ public enum VNEventType
     None,
     FadeAndTeleport,
     RivalCaught,
+    Fade,
     CustomEvent
 }
 

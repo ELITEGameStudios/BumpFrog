@@ -25,12 +25,13 @@ MonoBehaviour:
   - characterName: Player
     dialogueText: 'Some late night practice never hurt anybody '
     soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 0}
-    playerPosition: 0
+    playerEmoticon: {fileID: 21300000, guid: 1533a391801739a4da9ef093a6651cd5, type: 3}
+    playerPosition: 1
     rivalEmoticon: {fileID: 0}
     rivalPosition: 0
     hasChoices: 0
     choices: []
   continueToNextDialogue: 1
   nextDialogue: {fileID: 11400000, guid: c53dfec132b23794080049fe84172eb4, type: 2}
-  eventType: 0
+  eventType: 2
+  targetCameraID: 0

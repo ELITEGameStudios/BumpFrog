@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DELETE THIS TO SEPERATE
   m_EditorClassIdentifier: 
   lines:
-  - characterName: SCENE
-    dialogueText: SCENE TRANSISTION TO SCENE 2
+  - characterName: Narrator
+    dialogueText: Later that day...
     soundEffect: {fileID: 0}
     playerEmoticon: {fileID: 0}
     playerPosition: 0
@@ -24,4 +24,5 @@ MonoBehaviour:
     choices: []
   continueToNextDialogue: 1
   nextDialogue: {fileID: 11400000, guid: ea1c5eb368ed41f43bfe7d557da6fdaa, type: 2}
-  eventType: 0
+  eventType: 1
+  targetCameraID: 1

@@ -13,31 +13,16 @@ MonoBehaviour:
   m_Name: LieIntro
   m_EditorClassIdentifier: 
   lines:
-  - characterName: Player
-    dialogueText: "My plans for the day got.... canceled and I didn\u2019t know how
-      to contact you"
+  - characterName: 
+    dialogueText: ...
     soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 21300000, guid: 22aed63dbce88524783fb0de53c1ee86, type: 3}
-    playerPosition: 2
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
     rivalEmoticon: {fileID: 0}
     rivalPosition: 0
     hasChoices: 0
     choices: []
-  - characterName: Rival
-    dialogueText: "OH YEAH!!! AND WHAT WERE YOU\u2019RE PLANS THEN!!!"
-    soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 0}
-    playerPosition: 2
-    rivalEmoticon: {fileID: 21300000, guid: 51cd341552581ef4a94a45da2db1b164, type: 3}
-    rivalPosition: 4
-    hasChoices: 1
-    choices:
-    - choiceText: Its not important!
-      nextDialogue: {fileID: 11400000, guid: 8487eb00ace9d0d42b03f5e47b6408fb, type: 2}
-    - choiceText: I don't have any
-      nextDialogue: {fileID: 11400000, guid: d3eda031b6813344c9c8854479ab6db4, type: 2}
-    - choiceText: Wanted to eat my food
-      nextDialogue: {fileID: 11400000, guid: ae8db102589fd534fa69d63c70e068c9, type: 2}
-  continueToNextDialogue: 0
-  nextDialogue: {fileID: 0}
-  eventType: 0
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 11400000, guid: 2348f9ca45226a242ac419c2eebcfdec, type: 2}
+  eventType: 1
+  targetCameraID: 2

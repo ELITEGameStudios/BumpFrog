@@ -1207,9 +1207,12 @@ MonoBehaviour:
   fadeDuration: 1.5
   blackScreenHoldTime: 0.5
   currentCamera: {fileID: 313981447}
-  availableCameras: []
-  rivalModel: {fileID: 0}
-  rivalCaughtPosition: {fileID: 0}
+  availableCameras:
+  - {fileID: 313981447}
+  - {fileID: 1180199113}
+  - {fileID: 2028542268}
+  rivalModel: {fileID: 291497464}
+  rivalCaughtPosition: {fileID: 619895569}
   rivalMoveDuration: 1
 --- !u!4 &353965279
 Transform:
@@ -1925,6 +1928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 573082429}
   - component: {fileID: 573082428}
+  - component: {fileID: 573082430}
   m_Layer: 0
   m_Name: AudioSource2
   m_TagString: Untagged
@@ -2044,6 +2048,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573082430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573082427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b1924cf5187024a8551764755ec264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &585785158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2054,6 +2070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 585785159}
   - component: {fileID: 585785160}
+  - component: {fileID: 585785161}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -2100,9 +2117,23 @@ MonoBehaviour:
   rivalPos3: {fileID: 144077079}
   rivalPos4: {fileID: 701373976}
   audioSource: {fileID: 573082428}
-  dialogueObject: {fileID: 11400000, guid: bd9330096303e9c41927117b2aa4ba15, type: 2}
+  dialogueObjectWin: {fileID: 11400000, guid: bd9330096303e9c41927117b2aa4ba15, type: 2}
+  dialogueObjectLose: {fileID: 11400000, guid: 0d1e661e5f75bfc4a86f4aee3ea27ae4, type: 2}
+  playerWon: 1
   choicePanel: {fileID: 1917098268}
   choiceButtonPrefab: {fileID: 3917584194897369024, guid: dee74bc715425d9418ff5e7cdab974bf, type: 3}
+--- !u!114 &585785161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585785158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b1924cf5187024a8551764755ec264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &618845518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2339,7 +2370,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &671245215
 MonoBehaviour:
@@ -2745,7 +2776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &850786696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5668,7 +5699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2001219170
 MonoBehaviour:
   m_ObjectHideFlags: 0

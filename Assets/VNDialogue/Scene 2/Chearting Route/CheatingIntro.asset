@@ -13,31 +13,16 @@ MonoBehaviour:
   m_Name: CheatingIntro
   m_EditorClassIdentifier: 
   lines:
-  - characterName: Player
-    dialogueText: "I- I\u2019m sorry... I just wanted to get some practice in...
-      with just the frog. I never get to be alone with the frog, it\u2019s always
-      the three of us?"
+  - characterName: 
+    dialogueText: ...
     soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 21300000, guid: 3ea7d463e7f89db458f460937c53a5a3, type: 3}
-    playerPosition: 4
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
     rivalEmoticon: {fileID: 0}
     rivalPosition: 0
     hasChoices: 0
     choices: []
-  - characterName: Rival
-    dialogueText: What is this?! You guys are so gross! You?! With a frog?! What
-      would your mother say??
-    soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 0}
-    playerPosition: 2
-    rivalEmoticon: {fileID: 21300000, guid: 51cd341552581ef4a94a45da2db1b164, type: 3}
-    rivalPosition: 2
-    hasChoices: 1
-    choices:
-    - choiceText: Don't say that!
-      nextDialogue: {fileID: 11400000, guid: d18d51606ddd944438aea88e193ad642, type: 2}
-    - choiceText: Whats wrong with a frog?
-      nextDialogue: {fileID: 11400000, guid: f9b3928b6c774764393bb04cd255becd, type: 2}
-  continueToNextDialogue: 0
-  nextDialogue: {fileID: 0}
-  eventType: 0
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 11400000, guid: 8f4a16be8aef5a14a9a339edf9dfdeb7, type: 2}
+  eventType: 1
+  targetCameraID: 2

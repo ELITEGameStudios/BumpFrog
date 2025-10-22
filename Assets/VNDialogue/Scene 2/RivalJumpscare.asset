@@ -26,8 +26,8 @@ MonoBehaviour:
   - characterName: Player
     dialogueText: "Its not.. it\u2019s not what its look like"
     soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 0}
-    playerPosition: 0
+    playerEmoticon: {fileID: 21300000, guid: 0522a5a4bf09c8f47951584221c07164, type: 3}
+    playerPosition: 2
     rivalEmoticon: {fileID: 0}
     rivalPosition: 4
     hasChoices: 0
@@ -50,4 +50,5 @@ MonoBehaviour:
       nextDialogue: {fileID: 11400000, guid: aaec69d7bea7fdc429bc642f1e2f82ab, type: 2}
   continueToNextDialogue: 0
   nextDialogue: {fileID: 0}
-  eventType: 0
+  eventType: 1
+  targetCameraID: 2

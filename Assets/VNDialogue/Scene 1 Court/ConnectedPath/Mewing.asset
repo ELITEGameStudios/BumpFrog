@@ -25,3 +25,4 @@ MonoBehaviour:
   continueToNextDialogue: 1
   nextDialogue: {fileID: 11400000, guid: eb76cb3aef1217c43a192650e2de2236, type: 2}
   eventType: 0
+  targetCameraID: 1

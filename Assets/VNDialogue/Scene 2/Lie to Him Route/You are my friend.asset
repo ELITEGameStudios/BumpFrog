@@ -33,4 +33,5 @@ MonoBehaviour:
     choices: []
   continueToNextDialogue: 0
   nextDialogue: {fileID: 0}
-  eventType: 0
+  eventType: 3
+  targetCameraID: 0

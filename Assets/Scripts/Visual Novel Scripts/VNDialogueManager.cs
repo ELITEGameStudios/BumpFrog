@@ -27,18 +27,25 @@ public class VNDialogueManager : MonoBehaviour
     public AudioSource audioSource;
 
     [Header("Data")]
-    public DialogueObject dialogueObject;
+    public DialogueObject dialogueObjectWin;
+    public DialogueObject dialogueObjectLose;
+    [Header("Game State")]
+    public bool playerWon = true;
     
     [Header("Choices UI")]
     public GameObject choicePanel;
     public Button choiceButtonPrefab;
     
+    private DialogueObject dialogueObject; 
     private int currentLineIndex = 0;
     private List<Button> spawnedChoices = new();
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // ✅ Choose starting dialogue based on outcome
+        dialogueObject = playerWon ? dialogueObjectWin : dialogueObjectLose;
+
         if (nextButton != null)
             nextButton.onClick.AddListener(DisplayNextLine);
 
@@ -209,6 +216,9 @@ public class VNDialogueManager : MonoBehaviour
                         break;
                     case VNEventType.RivalCaught:
                         eventManager.RivalCaught();
+                        break;
+                    case VNEventType.Fade:
+                        eventManager.FadeToBlack();
                         break;
                 }
             }

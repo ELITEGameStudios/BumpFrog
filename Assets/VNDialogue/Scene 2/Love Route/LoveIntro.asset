@@ -13,48 +13,16 @@ MonoBehaviour:
   m_Name: LoveIntro
   m_EditorClassIdentifier: 
   lines:
-  - characterName: Player
-    dialogueText: You were always so good at Volleyball, I was jealous of your skills
-      and talent, I felt like I needed to get better in order to play with you.
+  - characterName: 
+    dialogueText: ...
     soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 21300000, guid: ee5a52b72125a904e8ac2f75d9f15441, type: 3}
-    playerPosition: 3
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
     rivalEmoticon: {fileID: 0}
     rivalPosition: 0
     hasChoices: 0
     choices: []
-  - characterName: Rival
-    dialogueText: But why though?
-    soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 0}
-    playerPosition: 3
-    rivalEmoticon: {fileID: 21300000, guid: e3c4158dde9f43b4fb813b36e609d2c3, type: 3}
-    rivalPosition: 2
-    hasChoices: 0
-    choices: []
-  - characterName: Player
-    dialogueText: If I wasn't good enough you would move on to other opponents and
-      I didn't want to lose you.
-    soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 21300000, guid: 1bc073046b3714041945298f4ba28164, type: 3}
-    playerPosition: 4
-    rivalEmoticon: {fileID: 0}
-    rivalPosition: 2
-    hasChoices: 0
-    choices: []
-  - characterName: Rival
-    dialogueText: I see... Is that really the truth?
-    soundEffect: {fileID: 0}
-    playerEmoticon: {fileID: 0}
-    playerPosition: 4
-    rivalEmoticon: {fileID: 0}
-    rivalPosition: 2
-    hasChoices: 1
-    choices:
-    - choiceText: It is...
-      nextDialogue: {fileID: 11400000, guid: 7b37653e225d0414f97478886a1aae1f, type: 2}
-    - choiceText: 'I was embarrassed '
-      nextDialogue: {fileID: 11400000, guid: dc0d050621dd8cc47956246aadc81546, type: 2}
-  continueToNextDialogue: 0
-  nextDialogue: {fileID: 0}
-  eventType: 0
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 11400000, guid: 6336cc853422c9643a76f5ecea80642b, type: 2}
+  eventType: 1
+  targetCameraID: 2

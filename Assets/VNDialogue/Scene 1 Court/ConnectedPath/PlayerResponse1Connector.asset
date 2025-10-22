@@ -32,10 +32,11 @@ MonoBehaviour:
     rivalPosition: 1
     hasChoices: 1
     choices:
-    - choiceText: Already Got Plans
+    - choiceText: Already got plans
       nextDialogue: {fileID: 11400000, guid: 0482d43c2fcd046439b4eb9d44e4784d, type: 2}
     - choiceText: Feeling under the weather
       nextDialogue: {fileID: 11400000, guid: c7a178bd18df6b14fb14f73f66a489bd, type: 2}
   continueToNextDialogue: 0
   nextDialogue: {fileID: 0}
   eventType: 0
+  targetCameraID: 0

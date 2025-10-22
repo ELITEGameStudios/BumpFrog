@@ -84,4 +84,14 @@ public class VNEventManager : MonoBehaviour
 
         rivalModel.position = endPos;
     }
+    
+    public void FadeToBlack()
+    {
+        StartCoroutine(FadeOutOnly());
+    }
+
+    private IEnumerator FadeOutOnly()
+    {
+        yield return Fade(1); // fade to black
+    }
 }

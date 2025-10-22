@@ -139,7 +139,7 @@ public class DialogueStringScript : MonoBehaviour
 
         if (monologue.givesLoveScore)
         {
-            Debug.Log("gave love?");
+            // Debug.Log("gave love?");
             GameManager.instance.GiveLoveScore(monologue.loveScore);
         }
 
@@ -222,18 +222,25 @@ public class DialogueStringScript : MonoBehaviour
     }
 
 
-    public IEnumerator MonologueCoroutine(Monologue monologue, int lettersPerSecond = 15)
+    public IEnumerator MonologueCoroutine(Monologue monologue, int lettersPerSecond = 50)
     {
         ui.mainMonologue.text = "";
         isScrolling = true;
 
-        for (int i = 0; i < ui.mainMonologue.text.Length; i++)
+        for (int i = 0; i < monologue.text.Length; i++)
         {
             if (skipScrollingInput) { skipScrollingInput = false; break; }
             ui.mainMonologue.text += monologue.text[i];
+
+            AudioManager.instance.Play("vorp");
             yield return new WaitForSecondsRealtime(1.0f / lettersPerSecond);
+
         }
 
+        if (monologue.playsBoom)
+        {
+            AudioManager.instance.Play("boom");
+        }
         isScrolling = false;
         ui.mainMonologue.text = monologue.text;    
     }
@@ -290,13 +297,15 @@ public class Monologue
     public QuoteImage imageId;
     public bool givesLoveScore { get { return loveScore > 0; } }
     public bool insultsNed;
+    public bool playsBoom;
 
-    public Monologue(string text, QuoteImage imageId, int loveScore = 0, bool insultsNed = false)
+    public Monologue(string text, QuoteImage imageId, int loveScore = 0, bool insultsNed = false, bool playsBoom = false)
     {
         this.text = text;
         this.imageId = imageId;
         this.loveScore = loveScore;
         this.insultsNed = insultsNed;
+        this.playsBoom = playsBoom;
     }
 }
 
@@ -306,7 +315,7 @@ public class DialogueOption : Monologue
 {
     public OptionType optionType;
 
-    public DialogueOption(string text, QuoteImage imageId, OptionType optionType, int loveScore = 0) : base(text, imageId, loveScore)
+    public DialogueOption(string text, QuoteImage imageId, OptionType optionType, int loveScore = 0, bool playsBoom = false) : base(text, imageId, loveScore, playsBoom: playsBoom)
     {
         this.optionType = optionType;
     }
@@ -367,7 +376,7 @@ public static class Dialogue
                     new Monologue("LILY: That joke was ass.", QuoteImage.LILYDissapointed)
                 },
                 new Monologue[]{ // Option 2 responses
-                    new Monologue("LILY: LOLOLOL you kinda funny twin. Gj.", QuoteImage.LILYFlatteredImage, loveScore: 10)
+                    new Monologue("LILY: LOLOLOL you kinda funny twin. Good job.", QuoteImage.LILYFlatteredImage, loveScore: 10)
                 },
                 new Monologue[]{ // Option 3 responses
                     new Monologue("LILY: ...", QuoteImage.LILYDissapointed), // Will always be insulting ned
@@ -544,7 +553,7 @@ public static class Dialogue
             new DialogueOption[3]{ // Options List
                 new ("Save that for Jequavonte as I walk home with my girl", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
                 new ("Lily can beat me any day of the week.", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
-                new ("Ned you clearly don't own an air fryer.", QuoteImage.BARTHOLEMEWdissapointedImage, OptionType.INSULTNED)
+                new ("Ned you clearly don't own an air fryer.", QuoteImage.BARTHOLEMEWdissapointedImage, OptionType.INSULTNED, playsBoom: true)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -576,7 +585,7 @@ public static class Dialogue
             new Monologue[][]{ // List of responses depending on option chosen
                 
                 new Monologue[]{ // Option 1 responses
-                    new ("LILY: Then PROVE it and stop wasting my time, scum.", QuoteImage.LILYDissapointed)
+                    new ("LILY: Then PROVE it and stop wasting my time, scum.", QuoteImage.LILYDissapointed, playsBoom: true)
                 },
                 new Monologue[]{ // Option 2 responses
                     new ("LILY: I like your viciousness... prove  to me that your buzz has a bite!", QuoteImage.LILYFlatteredImage, 5),
@@ -706,7 +715,7 @@ public static class Dialogue
 
         new DialogueTree(
             new Monologue[] {
-                new("NED: ...Ok I did NOT consent to this.", QuoteImage.NEDInsultedImage),
+                new("NED: ...Ok I did NOT consent to this.", QuoteImage.NEDInsultedImage, playsBoom: true),
                 new("LILY: To win my loyalty and love, one of you two bugs need to win this game of Bump Frog and win my heart at the same time!", QuoteImage.LILYFlatteredImage),
                 new("BARTHOLEMEW: Oh you got it! I'll get this easy peezy!", QuoteImage.BARTHOLEMEWProudImage),
                 new("JEQUEVONTE: Bring it on!!!", QuoteImage.JEQUEVONTEProudImage)
@@ -764,11 +773,11 @@ public static class Dialogue
         new DialogueTree(
             new Monologue[] {
                 new("NED: ...", QuoteImage.NEDInsultedImage),
-                new("NED: You really shouldn’t have done that..", QuoteImage.NEDInsultedImage),
+                new("NED: You really shouldn’t have done that..", QuoteImage.NEDInsultedImage, playsBoom: true),
                 new("YOU: : What is this? Whats happening??", QuoteImage.NEDInsultedImage),
                 new("LILY: Oh no.. This is why you should’ve just focused on me! Not that dumb frog!", QuoteImage.NEDInsultedImage),
                 new("JEQUEVONTE: This can’t be happening.", QuoteImage.NEDInsultedImage),
-                new("NED: I’ve had enough of this. You’ve crossed the line and now you shall pay for your sins...", QuoteImage.NEDInsultedImage),
+                new("NED: I’ve had enough of this. You’ve crossed the line and now you shall pay for your sins...", QuoteImage.NEDInsultedImage, playsBoom: true),
                 new("YOU: What are you... ", QuoteImage.NEDInsultedImage),
                 new("YOU: AAAAAAAAAA", QuoteImage.NEDInsultedImage)
             }

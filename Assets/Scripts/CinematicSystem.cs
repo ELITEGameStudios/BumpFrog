@@ -64,6 +64,7 @@ public class CinematicSystem : MonoBehaviour
         {
 
             yield return StartCoroutine(FadeInPanelCoroutine(entry));
+            if(entry.playsBoom){ AudioManager.instance.Play("boom"); }
             while (!Input.GetKeyDown(KeyCode.D)) { yield return null; } //while D is not pressed, don't continue slides
             yield return StartCoroutine(FadeOutPanelCoroutine(entry));
         }
@@ -109,6 +110,7 @@ public class CinematicSystem : MonoBehaviour
         {
 
             yield return StartCoroutine(FadeInPanelCoroutine(entry));
+            if(entry.playsBoom){ AudioManager.instance.Play("boom"); }
             while (!Input.GetKeyDown(KeyCode.D)) { yield return null; } //While D is down, progress comic
             yield return StartCoroutine(FadeOutPanelCoroutine(entry));
         }
@@ -141,6 +143,9 @@ public class CinematicSystem : MonoBehaviour
         foreach (CinemaScene entry in targetEntries)
         {
             yield return StartCoroutine(FadeInPanelCoroutine(entry));
+
+            if(entry.playsBoom){ AudioManager.instance.Play("boom"); }
+            
             while (!Input.GetKeyDown(KeyCode.D)) { yield return null; } //D Key
             yield return StartCoroutine(FadeOutPanelCoroutine(entry));
         }
@@ -188,5 +193,6 @@ public class CinemaScene{
     public float fade;
     public Graphic[] graphics;
     public Color color;
+    public bool playsBoom;
     // public DialogueTree tree;
 }

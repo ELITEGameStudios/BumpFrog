@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: RivalConnector
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Rival
+    dialogueText: 'Well what about us? I thought we were starting to- Ugh! Forget
+      it! '
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: ...
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: "We were thinking of going to nationals together... You\u2019re
+      just going to throw all that away?"
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 1
+    choices:
+    - choiceText: Im Sorry
+      nextDialogue: {fileID: 11400000, guid: fbe80967e28aa6e4c8044bca1bd95036, type: 2}
+    - choiceText: I didn't mean it
+      nextDialogue: {fileID: 11400000, guid: 4e2dd2186933d8849928af94109ea68d, type: 2}
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 0}
+  eventType: 0

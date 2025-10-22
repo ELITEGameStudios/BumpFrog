@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: LeftOvers
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Player
+    dialogueText: I was going to eat my leftovers
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: b6ea07fc28213ab429a956ae46f825a0, type: 3}
+    playerPosition: 1
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 4
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: But it looks like you had your snacks in your bag all along! You
+      pig.
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 1
+    rivalEmoticon: {fileID: 21300000, guid: 51cd341552581ef4a94a45da2db1b164, type: 3}
+    rivalPosition: 3
+    hasChoices: 0
+    choices: []
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 11400000, guid: 998c034de7d2eea4d8aab60b8d7a50e3, type: 2}
+  eventType: 0

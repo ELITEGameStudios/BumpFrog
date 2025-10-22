@@ -10,24 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
-  m_Name: WinIntro
+  m_Name: RivalConnector1
   m_EditorClassIdentifier: 
   lines:
   - characterName: Rival
-    dialogueText: Hey great game out there playa!
+    dialogueText: Oh bummer, I wont force yah but my family does miss you. See you
+      later then.
     soundEffect: {fileID: 0}
     playerEmoticon: {fileID: 0}
     playerPosition: 1
-    rivalEmoticon: {fileID: 21300000, guid: 3da4f74cb34ab0245b3f5799abdf408d, type: 3}
-    rivalPosition: 1
+    rivalEmoticon: {fileID: 21300000, guid: dafa8f4e5cf0de643b10ce4555a4440c, type: 3}
+    rivalPosition: 2
     hasChoices: 1
     choices:
-    - choiceText: That was close
-      nextDialogue: {fileID: 11400000, guid: 85e2ddb17f8a3bb4c9165a89d91c9869, type: 2}
-    - choiceText: Yeah great game
-      nextDialogue: {fileID: 0}
-    - choiceText: I destroyed you
-      nextDialogue: {fileID: 0}
+    - choiceText: Cya Later!
+      nextDialogue: {fileID: 11400000, guid: 4e81f94ed43fafa4484a8fc0418d8f3d, type: 2}
+    - choiceText: Mew and Leave
+      nextDialogue: {fileID: 11400000, guid: 488d5cc15923af1439e68de55d52d023, type: 2}
   continueToNextDialogue: 0
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: eb76cb3aef1217c43a192650e2de2236, type: 2}
   eventType: 0

@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: RivalEndConnector
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Rival
+    dialogueText: You had no idea how I felt. But it seems like you never cared.
+      I hope I never see you again.
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 21300000, guid: 51cd341552581ef4a94a45da2db1b164, type: 3}
+    rivalPosition: 4
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: (Rival Fly storms off betrayed by you and tries to move onto something
+      more)
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: (Rival Fly spent months searching for something that would fill
+      the hole in their heart that you created)
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: "(The Rival Fly moved forward nonetheless with their determination
+      to prove themselves to you that they didn\u2019t need you to support them)"
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: (After a few years you saw your old rival playing in the pro scene
+      on live TV in the finals)
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: (You could only dream of having a friend like him again)
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: 'ENDING : RIVAL GOES PRO '
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 0}
+  eventType: 0

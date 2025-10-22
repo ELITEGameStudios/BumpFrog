@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: DidntMeantIt
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Player
+    dialogueText: "No I didn\u2019t mean to... I still want us to play together.
+      I was just scared..."
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: 3ea7d463e7f89db458f460937c53a5a3, type: 3}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 1
+    choices: []
+  - characterName: Rival
+    dialogueText: Scared of what?!
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 21300000, guid: 9e366ce2cdbb1314eb24d4a81719f60b, type: 3}
+    rivalPosition: 4
+    hasChoices: 1
+    choices: []
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 11400000, guid: 0eac2f36c04642045a4ff8375d52a860, type: 2}
+  eventType: 0

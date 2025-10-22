@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: PlayerResponse3
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Player
+    dialogueText: Nah man, that was hella easy, I destroyed you as always
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: f3aabf7b829a05047ad436d66c057247, type: 3}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 2
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: 'Jeez someone woke up on the wrong side of the bed, I had fun atleast '
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 2
+    rivalEmoticon: {fileID: 21300000, guid: 51cd341552581ef4a94a45da2db1b164, type: 3}
+    rivalPosition: 1
+    hasChoices: 0
+    choices: []
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 11400000, guid: b4e54c6c0e0487244b6594898a6b4a9c, type: 2}
+  eventType: 0

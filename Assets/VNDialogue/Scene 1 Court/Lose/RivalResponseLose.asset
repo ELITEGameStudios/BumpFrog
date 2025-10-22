@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
-  m_Name: RivalResponse3
+  m_Name: RivalResponseLose
   m_EditorClassIdentifier: 
   lines:
   - characterName: Rival
-    dialogueText: I'll definitely beat you next time, I'm getting better!
+    dialogueText: Haha Thanks, and im sure our next match will be just as exciting,
     soundEffect: {fileID: 0}
     playerEmoticon: {fileID: 0}
-    playerPosition: 0
-    rivalEmoticon: {fileID: 21300000, guid: e6ad5b6dddbd5464494c24608059ab9b, type: 3}
+    playerPosition: 2
+    rivalEmoticon: {fileID: 21300000, guid: 9ff6d2d799d7d2e47adda080b1b26b56, type: 3}
     rivalPosition: 2
     hasChoices: 0
     choices: []
-  continueToNextDialogue: 0
-  nextDialogue: {fileID: 0}
+  continueToNextDialogue: 1
+  nextDialogue: {fileID: 11400000, guid: 3775d2b142405be4295c4cffb046910c, type: 2}
   eventType: 0

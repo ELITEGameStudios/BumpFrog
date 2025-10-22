@@ -64,7 +64,7 @@ public class CinematicSystem : MonoBehaviour
         {
 
             yield return StartCoroutine(FadeInPanelCoroutine(entry));
-            while (!Input.anyKeyDown) { yield return null; }
+            while (!Input.GetKeyDown(KeyCode.D)) { yield return null; } //while D is not pressed, don't continue slides
             yield return StartCoroutine(FadeOutPanelCoroutine(entry));
         }
 
@@ -109,7 +109,7 @@ public class CinematicSystem : MonoBehaviour
         {
 
             yield return StartCoroutine(FadeInPanelCoroutine(entry));
-            while (!Input.anyKeyDown) { yield return null; }
+            while (!Input.GetKeyDown(KeyCode.D)) { yield return null; } //While D is down, progress comic
             yield return StartCoroutine(FadeOutPanelCoroutine(entry));
         }
 
@@ -141,7 +141,7 @@ public class CinematicSystem : MonoBehaviour
         foreach (CinemaScene entry in targetEntries)
         {
             yield return StartCoroutine(FadeInPanelCoroutine(entry));
-            while (!Input.anyKeyDown) { yield return null; }
+            while (!Input.GetKeyDown(KeyCode.D)) { yield return null; } //D Key
             yield return StartCoroutine(FadeOutPanelCoroutine(entry));
         }
 

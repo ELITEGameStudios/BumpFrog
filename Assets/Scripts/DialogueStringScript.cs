@@ -662,7 +662,7 @@ public static class Dialogue
             new Monologue[] {
                 new("JEQUEVONTE: Hey...", QuoteImage.JEQUEVONTEIdleImage),
                 new("BARTHOLEMEW: What's going on here!??", QuoteImage.BARTHOLEMEWIdleImage),
-                new("JEQUEVONTE: Lily, why are you", QuoteImage.JEQUEVONTEIdleImage),
+                new("JEQUEVONTE: Lily, why are you--", QuoteImage.JEQUEVONTEIdleImage),
                 new("BARTHOLEMEW: --with HIM!!??", QuoteImage.BARTHOLEMEWdissapointedImage),
 
                 new("LILY: I- oh dear. Hi boys... I can explain...", QuoteImage.LILYDissapointed),
@@ -674,7 +674,7 @@ public static class Dialogue
                 new("NED: What?? But I thought Lily was single!", QuoteImage.NEDInsultedImage),
 
                 new("BARTHOLEMEW: Stay out of this you wierd...voluptuous toad!!!", QuoteImage.BARTHOLEMEWIdleImage),
-                new("NED: Hello? I'm a frog first of all and my name is Ned! I don't even know who you freaks are!! I'm just here for the beautiful and mesmerizing Queen Lily", QuoteImage.NEDNormal),
+                new("NED: Hello? I'm a frog first of all and my name is Ned! I don't even know who you freaks are!! I'm just here for the beautiful and mesmerizing Queen Lily!", QuoteImage.NEDNormal),
                 new("JEQUEVONTE: Well you can't have her! She's MINE!", QuoteImage.JEQUEVONTEIdleImage),
                 new("BARTHOLEMEW: Excuse you, she's MINE actually!", QuoteImage.BARTHOLEMEWIdleImage),
                 new("JEQUEVONTE: No she's--", QuoteImage.JEQUEVONTEIdleImage),
@@ -683,7 +683,8 @@ public static class Dialogue
                 new("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEIdleImage),
                 new("Ned: ...", QuoteImage.NEDNormal),
                 new("LILY: If you want to have me for yourself then show me that you're worthy enough to keep me. And I know just the way!", QuoteImage.LILYFlatteredImage),
-                new("Ned: ...\n Haha... why are you looking at me like that Lily??", QuoteImage.NEDNormal),
+                new("Ned: ...", QuoteImage.NEDInsultedImage),
+                new ("Ned: Haha... why are you looking at me like that Lily??", QuoteImage.NEDNormal),
             }
         ),
 

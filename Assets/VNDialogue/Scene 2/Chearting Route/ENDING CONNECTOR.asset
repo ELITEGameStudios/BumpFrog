@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: ENDING CONNECTOR
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Narrator
+    dialogueText: (The next volleyball practice was extremely tense.  It was a quick
+      session. Not many words were shared,  but your rival sure played like 2012
+      LeBron James)
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: '(The practice following that never even started. You show up to
+      the court at the usual time and your rival was not there. Neither was the frog. '
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: ...
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: I guess your volleyball saga is over...)
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Player
+    dialogueText: GASP* WHAT THE #*%@& IS GOING ON HERE?!  ARE YOU TWO-???
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: 'Route: Cheating Ending '
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 0
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 0}
+  eventType: 0

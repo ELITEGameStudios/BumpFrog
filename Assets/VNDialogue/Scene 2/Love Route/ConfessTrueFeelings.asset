@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca46c4d42974b0d4b8dd731949bd1376, type: 3}
+  m_Name: ConfessTrueFeelings
+  m_EditorClassIdentifier: 
+  lines:
+  - characterName: Player
+    dialogueText: I love you, would you like to go on a 2 minute date with me
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: 8d81c61101d7b4a43beebda8856ebb70, type: 3}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 0
+    hasChoices: 0
+    choices: []
+  - characterName: Rival
+    dialogueText: I thought you wouldn't ask, of course id love too go on a date
+      with you.
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 21300000, guid: 3da4f74cb34ab0245b3f5799abdf408d, type: 3}
+    rivalPosition: 4
+    hasChoices: 0
+    choices: []
+  - characterName: Player
+    dialogueText: "I know the perfect spot you\u2019re gonna love it"
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 21300000, guid: 0522a5a4bf09c8f47951584221c07164, type: 3}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 4
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: (After years of playing volleyball together you both confess your
+      feelings for each other and find true love in each other. You both spend the
+      rest of your lives together happy it all worked out.)
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 4
+    hasChoices: 0
+    choices: []
+  - characterName: Narrator
+    dialogueText: 'Route: Enemies to lovers ending'
+    soundEffect: {fileID: 0}
+    playerEmoticon: {fileID: 0}
+    playerPosition: 4
+    rivalEmoticon: {fileID: 0}
+    rivalPosition: 4
+    hasChoices: 0
+    choices: []
+  continueToNextDialogue: 0
+  nextDialogue: {fileID: 0}
+  eventType: 0

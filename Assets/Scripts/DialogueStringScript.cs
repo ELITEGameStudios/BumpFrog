@@ -620,10 +620,7 @@ public static class Dialogue
             new DialogueOption[3]{ // Options List
                 new ("Me? Weak? I was just holding back!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
                 new ("The only thing I’m weak for is Queen Lily!", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
-                new ("WHO DO YOU THINK YOU ARE? YOU'RE JUST A LOUSY TOAD. WHAT EVEN ARE YOU. A TOAD OR A FROG? ALSO WHY ARE YOU EVEN SO VULUPTUOUS FOR?? WHY ARE YOU SO ROUND? WHAT'S WRONG WITH YOU?" +
-                    " ALSO WHAT'S WITH FROGS? THEY'RE JUST AMPHIBIANS BUT WHAT EVEN ARE AMPHIBIANS? THEY SURVIVE ON LAND AND IN WATER, LIKE WTF? PICK A SIDE, WEIRDO. YOU DON'T BELOND ANYWHERE. WHAT KIND " +
-                    "OF ALIEN ARE YOU? YOU DON'T EVEN BELONG HERE. AND THEN YOU HAVE THE GALL TO TAKE LILY FROM ME!? AS IF SHE'D WANT SOME STUPID TOAD-FROG-ALIEN-BALL THING LIKE YOU. DON'T MAKE ME LAUGH, " +
-                    "YOU'RE HONESTLY SO PATHETIC THINKING YOU CAN GET TO ME. NO, YOU DIDN'T GET TO ME AT ALL! WHY WOULD YOU THINK THAT? WHAT ARE--", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new ("*COMICALLY LARGE PARAGRAPH RANT*", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -635,8 +632,16 @@ public static class Dialogue
                     new ("LILY: Oh, I just love it when they grovel! So pathetically delicious.", QuoteImage.LILYFlatteredImage, 10),
                 },
                 new Monologue[]{ // Option 3 responses
-                    new ("NED: Damn bro you did not need to say all that.", QuoteImage.NEDInsultedImage),
-                    new ("YOU: Yes I did.", QuoteImage.BARTHOLEMEWIdleImage)
+                    new ("YOU: WHO DO YOU THINK YOU ARE? YOU'RE JUST A LOUSY TOAD. WHAT EVEN ARE YOU. A TOAD OR A FROG? ALSO WHY ARE YOU EVEN SO VULUPTUOUS FOR?? WHY ARE YOU SO ROUND? WHAT'S WRONG WITH YOU?" +
+                        " ALSO WHAT'S WITH FROGS? THEY'RE JUST AMPHIBIANS BUT WHAT EVEN ARE AMPHIBIANS? THEY SURVIVE ON LAND AND IN WATER, LIKE WTF? PICK A SIDE, WEIRDO. YOU DON'T BELOND ANYWHERE. WHAT KIND" +
+                        "OF ALIEN ARE YOU? YOU DON'T EVEN BELONG HERE. AND THEN YOU HAVE THE GALL TO TAKE LILY FROM ME!? AS IF SHE'D WANT SOME STUPID TOAD-FROG-ALIEN-BALL THING LIKE YOU. DON'T MAKE ME LAUGH, " +
+                        "YOU'RE HONESTLY SO PATHETIC THINKING YOU CAN GET TO ME. NO, YOU DIDN'T GET TO ME AT ALL! WHY WOULD YOU THINK THAT? DO YOU REALLY THINK I'D FALL FOR THAT OBVIOUS RAGE BAIT? HAHAHAHA" +
+                        " I'M DEFINITLEY NOT INSECURE AT ALL OR ANYTHING. NO, I DONT HAVE ANXIETY IN CASE THAT'S WHAT YOU WERE THINKING. I KNOW I WILL WIN THIS AND NOTHING YOU SAY CAN MAKE ME FEEL BAD ABOUT" +
+                        " MYSELF, GOT IT? I DON'T EVEN KNOW WHO YOU ARE AND YOU DON'T EVEN KNOW WHO I AM. DUMB ROUND FROG. I'LL BEAT YOU UP AGAIN JUST WATCH IT. I'M NOT WEAK AT ALL OR ANYTHING, ACTUALLY, YOU'RE" +
+                        " THE WEAK ONE HERE. YOU'RE SO SMALL AND PATHETIC. WHY IS A FROG EVEN BEING BEAT UP BY FLIES LOL? HOW FUNNY IS THAT. LIKE, THAT'S TOTALLY THE OPPOSITE OF REALITY. THAT'S HOW WEAK YOU ARE," +
+                        "I'M NOT THE WEAK ONE SO STOP LOOKING AT ME LIKE THAT. ARE YOU EVEN LISTENING? DO FROGS EVEN HAVE EARS? CAN YOU EVEN HEAR ME PROPERLY--", QuoteImage.JEQUEVONTEUpsetImage),
+                    new ("NED: I ain't reading all that.", QuoteImage.NEDInsultedImage),
+                    new ("YOU: ...", QuoteImage.BARTHOLEMEWdissapointedImage)
                 }
             }
         ),
@@ -646,19 +651,19 @@ public static class Dialogue
             new Monologue("LILY: How pathetic, I guess Jequavonte might be the better mosquito after all.", QuoteImage.LILYDissapointed), // Starting Text
             
             new DialogueOption[3]{ // Options List
-                new ("Jequavnte aint seen nothin yet", QuoteImage.BARTHOLEMEWIdleImage, OptionType.REDEMPTION),
-                new ("please. He cant even keep the ball up for half a minute", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
-                new ("Me? Pathetic? What about Ned?\nLook at him. Just look.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new ("Jequavonte aint SEEN nothin yet!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.REDEMPTION),
+                new ("Please. He cant even keep the ball up for half a minute!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
+                new ("Me? Pathetic? What about Ned?\n...look at him. Just look.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
                 
                 new Monologue[]{ // Option 1 responses
-                    new ("JEQUEVONTE: I see...", QuoteImage.JEQUEVONTEIdleImage),
-                    new ("LILY: I dont know about that one", QuoteImage.LILYDissapointed)
+                    new ("JEQUEVONTE: I see...hehe", QuoteImage.JEQUEVONTEIdleImage),
+                    new ("LILY: I dont know about that one..", QuoteImage.LILYDissapointed)
                 },
                 new Monologue[]{ // Option 2 responses
-                    new ("Damn, Ok..", QuoteImage.LILYFlatteredImage, 10),
+                    new ("LILY: Damn, Ok..", QuoteImage.LILYFlatteredImage, 10),
                 },
                 new Monologue[]{ // Option 3 responses
                     new ("NED: ...", QuoteImage.NEDInsultedImage)

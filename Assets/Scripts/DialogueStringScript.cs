@@ -699,8 +699,8 @@ public static class Dialogue
                 new("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEIdleImage),
                 new("Ned: ...", QuoteImage.NEDNormal),
                 new("LILY: If you want to have me for yourself then show me that you're worthy enough to keep me. And I know just the way!", QuoteImage.LILYFlatteredImage),
-                new("Ned: ...", QuoteImage.NEDInsultedImage),
-                new ("Ned: Haha... why are you looking at me like that Lily??", QuoteImage.NEDNormal),
+                new("NED: ...", QuoteImage.NEDInsultedImage),
+                new ("NED: Haha... why are you looking at me like that Lily??", QuoteImage.NEDNormal),
             }
         ),
 

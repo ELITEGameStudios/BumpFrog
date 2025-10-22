@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using NUnit.Framework.Constraints;
 
 /* ------------------------ Main Monobehaviour -------------------- */
 public class DialogueStringScript : MonoBehaviour
@@ -352,12 +353,12 @@ public static class Dialogue
     {
         /* --- Dialogue tree 1 --- */
         new DialogueTree(
-            new Monologue("LILY: I want you to tell me a joke", QuoteImage.LILYFlatteredImage), // Starting Text
+            new Monologue("LILY: Nice one Barty! Now, entertain me and tell me a joke!", QuoteImage.LILYFlatteredImage), // Starting Text
             
             new DialogueOption[3]{ // Options List
-                new DialogueOption("Why did the chicken cross the road? to get to the other side", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
+                new DialogueOption("Why did the chicken cross the road? TO GET TO THE OTHER SIDE LOLOLOL", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
                 new DialogueOption("Jequevonte serves like he's scared of being swatted!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
-                new DialogueOption("Do I need to? Ned’s existence is a joke hahaha", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new DialogueOption("Do I need to? Ned’s existence is a joke XD", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -366,10 +367,11 @@ public static class Dialogue
                     new Monologue("LILY: That joke was ass.", QuoteImage.LILYDissapointed)
                 },
                 new Monologue[]{ // Option 2 responses
-                    new Monologue("LILY: LOLOLOL you kinda funny twin", QuoteImage.LILYFlatteredImage, loveScore: 10)
+                    new Monologue("LILY: LOLOLOL you kinda funny twin. Gj.", QuoteImage.LILYFlatteredImage, loveScore: 10)
                 },
                 new Monologue[]{ // Option 3 responses
-                    new Monologue("LILY: ...", QuoteImage.NEDInsultedImage) // Will always be insulting ned
+                    new Monologue("LILY: ...", QuoteImage.LILYDissapointed), // Will always be insulting ned
+                    new Monologue("Ned: ...", QuoteImage.NEDInsultedImage)
                 }
             }
         ),
@@ -381,7 +383,7 @@ public static class Dialogue
             new DialogueOption[3]{ // Options List
                 new DialogueOption("Quit buzzing so loud and prove it!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
                 new DialogueOption("Pfft, you wish..! I’ll win this one just like I’m winning the Queen!", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
-                new DialogueOption("Even if you and Ned teamed up against me, you’d still be a bunch of LOSERS!", QuoteImage.NEDInsultedImage, OptionType.INSULTNED)
+                new DialogueOption("Even if you and Ned teamed up against me, you’d still be a bunch of LOSERS!", QuoteImage.BARTHOLEMEWProudImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -395,7 +397,7 @@ public static class Dialogue
                     new Monologue("NED: and thats on PERIODT ", QuoteImage.NEDNormal)
                 },
                 new Monologue[]{ // Option 3 responses
-                    new Monologue("LILY: Super confident I see... charming :)", QuoteImage.LILYFlatteredImage, loveScore: 5), // Will always be insulting ned
+                    new Monologue("LILY: Super confident I see... charming :3", QuoteImage.LILYFlatteredImage, loveScore: 5), // Will always be insulting ned
                     new Monologue("NED: -_- ", QuoteImage.NEDInsultedImage) // Will always be insulting ned
                 }
             }
@@ -406,9 +408,9 @@ public static class Dialogue
             new Monologue("NED: C’mon guys, don’t you think that’s enough for now? I’m feeling real beat...", QuoteImage.NEDInsultedImage), // Starting Text
             
             new DialogueOption[3]{ // Options List
-                new DialogueOption("Pshh, that’s nothing compared to how Imma beat Jequevonte this round!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
+                new DialogueOption("Pshh, that’s nothing compared to how I'mma beat Jequevonte this round!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
                 new DialogueOption("It’s never enough if its for Queen Lily!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new DialogueOption("Shut up Ned. This isn't about you!", QuoteImage.NEDInsultedImage, OptionType.INSULTNED)
+                new DialogueOption("Shut up Ned. This isn't about you!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -428,12 +430,12 @@ public static class Dialogue
         
         /* --- Dialogue tree 4 --- */
         new DialogueTree(
-            new Monologue("LILY: To be honest, it’s been fun but I’m kind of getting bored here... Hey. Whats your favourite color?", QuoteImage.LILYDissapointed), // Starting Text
+            new Monologue("LILY: To be honest, it’s been fun but I’m kind of getting bored here... Hey. Whats your favourite color?", QuoteImage.LILYFlatteredImage), // Starting Text
             
             new DialogueOption[3]{ // Options List
-                new DialogueOption("Whatever colour you like is my favourite, Lily.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new DialogueOption("Whatever colour my enemies bleed.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
-                new DialogueOption("I like the colour that Ned’s about to turn when I’m done with him!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new DialogueOption("Whatever colour you like is my favourite, Lily.", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
+                new DialogueOption("Whatever colour my enemies bleed. #edgy #edgelord #FaZe", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
+                new DialogueOption("I like the colour that Ned’s about to turn when I’m done with him!", QuoteImage.BARTHOLEMEWProudImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -443,11 +445,12 @@ public static class Dialogue
                 },
                 new Monologue[]{ // Option 2 responses
                     new Monologue("LILY: How dedicated you are...how...adorable. Hehe. I just want to wrap you up in my web and eat you!", QuoteImage.LILYFlatteredImage, loveScore: 10),
-                    new Monologue("...", QuoteImage.JEQUEVONTEUpsetImage)
+                    new Monologue("...", QuoteImage.JEQUEVONTEUpsetImage),
+                    new Monologue("...please don't.", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 3 responses
                     new Monologue("LILY: ... ", QuoteImage.LILYDissapointed), // Will always be insulting ned
-                    new Monologue("NED: pause... ", QuoteImage.NEDInsultedImage) // Will always be insulting ned
+                    new Monologue("NED: ...relax...please.. ", QuoteImage.NEDInsultedImage) // Will always be insulting ned
                 }
             }
         ),
@@ -458,22 +461,23 @@ public static class Dialogue
             
             new DialogueOption[3]{ // Options List
                 new DialogueOption("As if! I could beat you 6-7 more times if I wanted to.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
-                new DialogueOption("*Shush opponent, look at Lily, Slide your finger along your jawline (rizz)", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new DialogueOption("The only thing getting beat here other than you is Ned - C'MERE NED", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new DialogueOption("*You shush opponent, look at Lily and slide your finger along your jawline (rizz)*", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
+                new DialogueOption("The only thing getting beat here other than you is Ned - C'MERE NED", QuoteImage.BARTHOLEMEWProudImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
                 
                 new Monologue[]{ // Option 1 responses
-                    new Monologue("LILY: Six..Seven..really? Lame.", QuoteImage.LILYDissapointed),
+                    new Monologue("LILY: Six..Seven..really? Euugh brotha eeugh.", QuoteImage.LILYDissapointed),
                 },
                 new Monologue[]{ // Option 2 responses
-                    new Monologue("LILY: Go on! My lovebug", QuoteImage.LILYFlatteredImage, 10),
-                    new Monologue("JEQUEVONTE...", QuoteImage.JEQUEVONTEUpsetImage)
+                    new Monologue("LILY: Go on! My lovebug <3 <3 !!11!1", QuoteImage.LILYFlatteredImage, 10),
+                    new Monologue("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 3 responses
-                    new Monologue("NED: please no more...", QuoteImage.NEDInsultedImage), // Will always be insulting ned
-                    new Monologue("BARTHOLEMEW: BALL AINT GONNA SERVE ITSELF-", QuoteImage.BARTHOLEMEWProudImage) // Will always be insulting ned
+                    new Monologue("NED: PLEASE...no..", QuoteImage.NEDNormal), // Will always be insulting ned
+                    new Monologue("NED: ..no..more..", QuoteImage.NEDInsultedImage),
+                    new Monologue("BARTHOLEMEW: HEHEHE BALL AINT GONNA SERVE ITSELF-", QuoteImage.BARTHOLEMEWProudImage) // Will always be insulting ned
                 }
             }
         ),
@@ -483,7 +487,7 @@ public static class Dialogue
             new Monologue("Looks like the game is almost over... what a shame, I was just beginning to have fun!", QuoteImage.LILYDissapointed), // Starting Text
             
             new DialogueOption[3]{ // Options List
-                new DialogueOption("Don’t worry Queen Lily, once this is over I can show you what real fun is", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
+                new DialogueOption("Don’t worry Queen Lily, once this is over I can show you what real fun is! ;D", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
                 new DialogueOption("Don’t be sad, I was just warming up! Watch this!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
                 new DialogueOption("If Ned would stop complaining, I’d do this all day!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
@@ -497,6 +501,7 @@ public static class Dialogue
                     new Monologue("LILY: Oh! Well, how thrilling and exciting then.. Show me", QuoteImage.LILYFlatteredImage)
                 },
                 new Monologue[]{ // Option 3 responses
+                    new Monologue("Ned:...Let it all be over soon..please..", QuoteImage.NEDInsultedImage)
                 }
             }
         ),
@@ -511,14 +516,15 @@ public static class Dialogue
             
             new DialogueOption[3]{ // Options List
                 new ("Keep talking and maybe someone will mistake that noise for actual buzz.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
-                new ("Maybe not trash, but it looks like you can’t stop picking me up hehe", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
+                new ("Maybe not trash, but it looks like you can’t stop picking me up hehe", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
                 new ("If by trash you mean Ned, then thats cool with me", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED) // Will always be insulting ned
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
                 
                 new Monologue[]{ // Option 1 responses
-                    new ("Aren't you one to talk?", QuoteImage.JEQUEVONTEProudImage),
+                    new ("JEQUAVONTE: Aren't you one to talk?", QuoteImage.JEQUEVONTEProudImage),
+                    new ("LILY: ..He's kinda right, Bartholomew..", QuoteImage.LILYDissapointed),
                 },
                 new Monologue[]{ // Option 2 responses
                     new ("LILY: OMG!!11??1 Enemies to lovers??", QuoteImage.LILYFlatteredImage, 10),
@@ -533,12 +539,12 @@ public static class Dialogue
         
         /* --- Dialogue tree 2 --- */
         new DialogueTree(
-            new Monologue("Damn bro you got beat harder than I am LOL", QuoteImage.NEDNormal), // Starting Text
+            new Monologue("NED: Damn bro you got beat harder than I am LOL", QuoteImage.NEDNormal), // Starting Text
             
             new DialogueOption[3]{ // Options List
                 new ("Save that for Jequavonte as I walk home with my girl", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
-                new ("Lily can beat me any day of the week.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new ("Ned you clearly don't own an air fryer.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new ("Lily can beat me any day of the week.", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
+                new ("Ned you clearly don't own an air fryer.", QuoteImage.BARTHOLEMEWdissapointedImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -551,7 +557,8 @@ public static class Dialogue
                     new ("LILY: While I love a good hunt, you should probably talk to someone about that... Like, a professional you know?", QuoteImage.LILYDissapointed),
                 },
                 new Monologue[]{ // Option 3 responses
-                    new ("NED: ...how dare you", QuoteImage.NEDInsultedImage)
+                    new ("NED: ...,", QuoteImage.NEDNormal),
+                    new ("NED: ...how dare you.", QuoteImage.NEDInsultedImage)
                 }
             }
         ),
@@ -562,8 +569,8 @@ public static class Dialogue
             
             new DialogueOption[3]{ // Options List
                 new ("Of course! I want you more than anything else!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new ("LILY: The only other thing I want is to DESTROY Jequavonté!!!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
-                new ("I just really want to beat Ned’s stupid face up tbh.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new ("The only other thing I want is to DESTROY Jequavonté!!!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
+                new ("I just really want to beat Ned’s stupid face up, tbh.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -576,7 +583,7 @@ public static class Dialogue
                 },
                 new Monologue[]{ // Option 3 responses
                     new ("JEQUEVONTE: Fair enough.", QuoteImage.JEQUEVONTEIdleImage),
-                    new ("NED: why :(", QuoteImage.NEDInsultedImage)
+                    new ("NED: Man..why..?", QuoteImage.NEDInsultedImage)
                 }
             }
         ),
@@ -587,8 +594,8 @@ public static class Dialogue
             
             new DialogueOption[3]{ // Options List
                 new ("You wouldn’t know game even if it looked at you in your beady little eyes.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
-                new ("The only game I want to play is the game of love", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new ("It’s all Ned’s fault, he’s so useless and dumb.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new ("The only game I want to play is the game of love", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
+                new ("It’s all Ned’s fault, he’s so useless and dumb.", QuoteImage.BARTHOLEMEWdissapointedImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -597,7 +604,8 @@ public static class Dialogue
                     new ("JEQUEVONTE: ...We ALL have beady eyes. We’re bugs. Idiot.", QuoteImage.JEQUEVONTEIdleImage)
                 },
                 new Monologue[]{ // Option 2 responses
-                    new ("Lily: How disgustingly cheesy. Good thing I like my prey topped with cheese though. Oops, did I say that out loud?", QuoteImage.LILYFlatteredImage, 10),
+                    new ("LILY: How disgustingly cheesy. Good thing I like my prey topped with cheese though!", QuoteImage.LILYFlatteredImage, 10),
+                    new ("LILY: ...oops, did I say that out loud?", QuoteImage.LILYFlatteredImage)
                 },
                 new Monologue[]{ // Option 3 responses
                     new ("NED: ... ", QuoteImage.NEDInsultedImage)
@@ -607,12 +615,15 @@ public static class Dialogue
 
         /* --- Dialogue tree 5 --- */
         new DialogueTree(
-            new Monologue("NED: When it comes to flies, you seem pretty weak...", QuoteImage.NEDNormal), // Starting Text
+            new Monologue("NED: When it comes to flies, you seem pretty weak not gonna lie...", QuoteImage.NEDNormal), // Starting Text
             
             new DialogueOption[3]{ // Options List
                 new ("Me? Weak? I was just holding back!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
-                new ("The only thing I’m weak for is Queen Lily!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new ("*Comically large paragraph in the game specifically insulting ned", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new ("The only thing I’m weak for is Queen Lily!", QuoteImage.BARTHOLEMEWProudImage, OptionType.RIZZ),
+                new ("WHO DO YOU THINK YOU ARE? YOU'RE JUST A LOUSY TOAD. WHAT EVEN ARE YOU. A TOAD OR A FROG? ALSO WHY ARE YOU EVEN SO VULUPTUOUS FOR?? WHY ARE YOU SO ROUND? WHAT'S WRONG WITH YOU?" +
+                    " ALSO WHAT'S WITH FROGS? THEY'RE JUST AMPHIBIANS BUT WHAT EVEN ARE AMPHIBIANS? THEY SURVIVE ON LAND AND IN WATER, LIKE WTF? PICK A SIDE, WEIRDO. YOU DON'T BELOND ANYWHERE. WHAT KIND " +
+                    "OF ALIEN ARE YOU? YOU DON'T EVEN BELONG HERE. AND THEN YOU HAVE THE GALL TO TAKE LILY FROM ME!? AS IF SHE'D WANT SOME STUPID TOAD-FROG-ALIEN-BALL THING LIKE YOU. DON'T MAKE ME LAUGH, " +
+                    "YOU'RE HONESTLY SO PATHETIC THINKING YOU CAN GET TO ME. NO, YOU DIDN'T GET TO ME AT ALL! WHY WOULD YOU THINK THAT? WHAT ARE--", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen

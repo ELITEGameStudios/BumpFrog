@@ -84,7 +84,7 @@ public class CinematicSystem : MonoBehaviour
         while (script.inTree) { yield return null; }
 
         inProgress = false;
-        // GameManager.instance.gameState = GameManager.GameState.PRERALLY;
+        GameManager.instance.gameState = GameManager.GameState.PRERALLY;
 
     }
 

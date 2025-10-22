@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
                 jumpInput = Input.GetKey(jumpKey);
                 diveInput = Input.GetKey(diveKey);
                 switchInput = Input.GetKeyDown(switchKey);
-                startInput = Input.anyKey;
+                startInput = Input.anyKeyDown;
 
                 return;
             
@@ -89,6 +89,7 @@ public class InputManager : MonoBehaviour
 
     public bool GetStart()
     {
-        return startInput && !Input.GetKey(KeyCode.Escape);
+        Debug.Log("Start input: " + (startInput && !Input.GetKey(KeyCode.Escape)));
+        return startInput && !Input.GetKeyDown(KeyCode.Escape);
     }
 }

@@ -540,7 +540,7 @@ public static class Dialogue
                     new ("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 3 responses
-                    new ("JEQUEVONTE: sure...", QuoteImage.JEQUEVONTEIdleImage),
+                    new ("JEQUEVONTE: Sure...", QuoteImage.JEQUEVONTEIdleImage),
                     new ("NED: ...", QuoteImage.NEDInsultedImage),
                 }
             }
@@ -648,7 +648,7 @@ public static class Dialogue
                         " I'M DEFINITLEY NOT INSECURE AT ALL OR ANYTHING. NO, I DONT HAVE ANXIETY IN CASE THAT'S WHAT YOU WERE THINKING. I KNOW I WILL WIN THIS AND NOTHING YOU SAY CAN MAKE ME FEEL BAD ABOUT" +
                         " MYSELF, GOT IT? I DON'T EVEN KNOW WHO YOU ARE AND YOU DON'T EVEN KNOW WHO I AM. DUMB ROUND FROG. I'LL BEAT YOU UP AGAIN JUST WATCH IT. I'M NOT WEAK AT ALL OR ANYTHING, ACTUALLY, YOU'RE" +
                         " THE WEAK ONE HERE. YOU'RE SO SMALL AND PATHETIC. WHY IS A FROG EVEN BEING BEAT UP BY FLIES LOL? HOW FUNNY IS THAT. LIKE, THAT'S TOTALLY THE OPPOSITE OF REALITY. THAT'S HOW WEAK YOU ARE," +
-                        "I'M NOT THE WEAK ONE SO STOP LOOKING AT ME LIKE THAT. ARE YOU EVEN LISTENING? DO FROGS EVEN HAVE EARS? CAN YOU EVEN HEAR ME PROPERLY--", QuoteImage.JEQUEVONTEUpsetImage),
+                        "I'M NOT THE WEAK ONE SO STOP LOOKING AT ME LIKE THAT. ARE YOU EVEN LISTENING? DO FROGS EVEN HAVE EARS? CAN YOU EVEN HEAR ME PROPERLY--", QuoteImage.BARTHOLEMEWIdleImage),
                     new ("NED: I ain't reading all that.", QuoteImage.NEDInsultedImage),
                     new ("YOU: ...", QuoteImage.BARTHOLEMEWdissapointedImage)
                 }
@@ -708,8 +708,8 @@ public static class Dialogue
                 new("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEIdleImage),
                 new("Ned: ...", QuoteImage.NEDNormal),
                 new("LILY: If you want to have me for yourself then show me that you're worthy enough to keep me. And I know just the way!", QuoteImage.LILYFlatteredImage),
-                new("Ned: ...", QuoteImage.NEDInsultedImage),
-                new ("Ned: Haha... why are you looking at me like that Lily??", QuoteImage.NEDNormal),
+                new("NED: ...", QuoteImage.NEDInsultedImage),
+                new ("NED: Haha... why are you looking at me like that Lily??", QuoteImage.NEDNormal),
             }
         ),
 

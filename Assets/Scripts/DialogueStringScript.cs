@@ -50,7 +50,7 @@ public class DialogueStringScript : MonoBehaviour
     public void Update()
     {
         timeInPrompt += Time.unscaledDeltaTime;
-        if (Input.anyKeyDown && currentTree != null && !options && ( firstPrompt ? timeInPrompt > 0.5f : true)) // clicked anything while in quote state
+        if (Input.GetKeyDown(KeyCode.D) && currentTree != null && !options && ( firstPrompt ? timeInPrompt > 0.5f : true)) // click D while in quote state
         {
             firstPrompt = false;
             if (isScrolling)
@@ -681,9 +681,9 @@ public static class Dialogue
                 new("LILY: ENOUGH!!", QuoteImage.LILYDissapointed),
                 new("BARTHOLEMEW: ...", QuoteImage.BARTHOLEMEWIdleImage),
                 new("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEIdleImage),
-                new("Ned: ...", QuoteImage.JEQUEVONTEIdleImage),
+                new("Ned: ...", QuoteImage.NEDNormal),
                 new("LILY: If you want to have me for yourself then show me that you're worthy enough to keep me. And I know just the way!", QuoteImage.LILYFlatteredImage),
-                new("Ned: ...\n Haha... why are you looking at me like that Lily??", QuoteImage.JEQUEVONTEIdleImage),
+                new("Ned: ...\n Haha... why are you looking at me like that Lily??", QuoteImage.NEDNormal),
             }
         ),
 

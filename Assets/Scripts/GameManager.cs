@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,17 +10,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] CameraMovement cam;
     public static GameManager instance { get; private set; }
     public bool second = false;
-    bool started = false;
     public bool paused = false;
+    public bool maxLoveScore {get{ return loveScore >= targetLoveScore; }}
 
 
-    public int playerPoints, enemyPoints, maxPoints = 7;
+    public int playerPoints, enemyPoints, maxPoints = 7, loveScore, targetLoveScore, nedInsultScore, targetNedInsultScore, netPoints, lovePointsThisTree;
     public TMP_Text playerPointText, enemyPointText;
     public Transform ballStartPosition;
 
     public GameObject winScreen, winText, loseText;
     public GameObject winImage, loseImage;
     public GameState gameState;
+    public Slider loveSlider, rageSlider;
 
     public DialogueStringScript stringScript;
 
@@ -38,6 +40,28 @@ public class GameManager : MonoBehaviour
         currentPlayer.movement.enabled = true;
         currentPlayer.ai.enabled = false;
         cam.ChangeTarget(currentPlayer.transform);
+    }
+
+    public void GiveLoveScore(int loveScore)
+    {
+        this.loveScore += loveScore;
+        // if (maxLoveScore) { this.loveScore = targetLoveScore; }
+
+        loveSlider.value = this.loveScore;
+        loveSlider.maxValue = targetLoveScore;
+        lovePointsThisTree += loveScore;
+    }
+    
+    public void InsultNed()
+    {
+        nedInsultScore++;
+        rageSlider.value = nedInsultScore;
+        rageSlider.maxValue = targetNedInsultScore;
+
+        if(nedInsultScore >= targetNedInsultScore)
+        {
+            CinematicSystem.instance.BeginNedSequence();
+        } 
     }
 
     public void AwardPoint(bool toPlayer)
@@ -81,26 +105,30 @@ public class GameManager : MonoBehaviour
 
     void PlayWinSequence(bool players)
     {
+        bool wonGame = ((loveScore) + (players ? 75 : 50)) >= 100;
         Time.timeScale = 0;
-        winScreen.SetActive(true);
 
-        winText.SetActive(players);
-        winImage.SetActive(players);
+        if (wonGame) { CinematicSystem.instance.BeginWinSequence(); }
+        else { CinematicSystem.instance.BeginLoseSequence(); }
+        
+        // winScreen.SetActive(true);
 
-        loseText.SetActive(!players);
-        loseImage.SetActive(!players);
+        // winText.SetActive(wonGame);
+        // winImage.SetActive(wonGame);
+
+        // loseText.SetActive(!wonGame);
+        // loseImage.SetActive(!wonGame);
 
         // playerPointText.text = maxPoints.ToString();
         // enemyPointText.text = maxPoints.ToString();
         
-        AudioManager.instance.Play(players? "Win Theme" : "Lose Theme");
+        // AudioManager.instance.Play(players? "Win Theme" : "Lose Theme");
     }
 
     void PlayRestartSequence()
     {
-
-        Time.timeScale = 0f;
-        started = false;
+        Time.timeScale = 1f;
+        if(gameState == GameState.RALLY) { gameState = GameState.PRERALLY; };
         ChangePlayerTarget(false);
 
         currentPlayer.Reset();
@@ -111,6 +139,7 @@ public class GameManager : MonoBehaviour
         BallBehavior.instance.bumpable = false;
         foreach (Enemy enemy in enemies) enemy.Reset();
         
+        lovePointsThisTree = 0;
     }
 
     void Update()
@@ -120,23 +149,29 @@ public class GameManager : MonoBehaviour
             ChangePlayerTarget(!second);
         }
 
-        if (InputManager.instance.GetStart() && !started && gameState == GameState.PRERALLY)
+        if (gameState != GameState.RALLY)
         {
+            BallBehavior.instance.rb.linearVelocity = Vector3.zero;
+            BallBehavior.instance.transform.position = ballStartPosition.position;
+            BallBehavior.instance.bumpable = false;
+
+        }
+        
+        if (InputManager.instance.GetStart() && gameState == GameState.PRERALLY && !CinematicSystem.instance.inProgress)
+        {
+            gameState = GameState.RALLY;
+
             Time.timeScale = 1;
             // BallBehavior.instance.BumpBall(BallBehavior.instance.transform.position + Vector3.down, true);   
+            BallBehavior.instance.transform.position = ballStartPosition.position;
             BallBehavior.instance.rb.linearVelocity = Vector3.up * 8;
             BallBehavior.instance.bumpable = true;
 
             AudioManager.instance.Play("Bump 1");
-            started = true;
-            gameState = GameState.RALLY;
+            
+            return;
         }
         
-        // if(gameState != GameState.RALLY){
-        //     BallBehavior.instance.transform.position = ballStartPosition.position;
-        //     BallBehavior.instance.bumpable = false;
-            
-        // }
     }
 
     void Awake()
@@ -145,6 +180,7 @@ public class GameManager : MonoBehaviour
         else if (instance != this) { Destroy(this); }
 
         PlayRestartSequence();
+        CinematicSystem.instance.BeginSequence();
         gameState = GameState.PRERALLY;
     }
 

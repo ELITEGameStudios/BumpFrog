@@ -17,6 +17,7 @@ public class BallBehavior : MonoBehaviour
     public Vector3 linearVelocity;
     public bool playerHasPosession;
     public int timesHit;
+    public Collider col;
 
     //bumping
     public bool bumpable = true;
@@ -45,10 +46,13 @@ public class BallBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
+        // if (GameManager.instance.paused || !GameManager.instance.started) return;
         if (GameManager.instance.paused) return;
 
         rb.AddForce(Physics.gravity * (ballGravityScale), ForceMode.Acceleration);
         linearVelocity = rb.linearVelocity;
+        // col.enabled = GameManager.instance.gameState == GameManager.GameState.RALLY;
+
     }
 
     

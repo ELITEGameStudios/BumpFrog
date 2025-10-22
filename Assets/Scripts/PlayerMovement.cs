@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float diveVelocity, diveTime, diveTimer;
     public bool grounded, canMoveInAir;
     public bool diving { get { return diveTimer > 0; } }
-    public bool canMove { get { return (grounded || canMoveInAir) && !diving; } }
+    public bool canMove { get { return (grounded || canMoveInAir) && !diving && GameManager.instance.gameState == GameManager.GameState.RALLY; } }
     public bool canJump { get { return grounded && !diving; } }
 
     // public GameObject 

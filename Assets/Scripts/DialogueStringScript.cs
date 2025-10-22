@@ -2,20 +2,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 /* ------------------------ Main Monobehaviour -------------------- */
 public class DialogueStringScript : MonoBehaviour
 {
     public int[] subjectCounter; // records player choice tendencies
-    public bool inTree;
-    public bool options;
+    public bool inTree, queuedSpecial;
+    public bool options, skipScrollingInput, isScrolling;
     public Queue<QueueEntry> monologueQueue;
     public DialogueTree currentTree;
     public DialogueOption[] currentOptions;
     public MainUI ui;
     public Sprite[] images; // order these with respect to quote image enum
-    
-    
+    private float timeInPrompt;
+    private bool firstPrompt;
+
+
 
     [System.Serializable]
     public struct MainUI
@@ -46,9 +49,17 @@ public class DialogueStringScript : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.anyKeyDown && currentTree != null && !options)// clicked anything while in quote state
+        timeInPrompt += Time.unscaledDeltaTime;
+        if (Input.anyKeyDown && currentTree != null && !options && ( firstPrompt ? timeInPrompt > 0.5f : true)) // clicked anything while in quote state
         {
-            TransitionToNext();
+            firstPrompt = false;
+            if (isScrolling)
+            {
+                skipScrollingInput = true;
+            }
+            else{
+                TransitionToNext();
+            }
         }
     }
 
@@ -68,12 +79,19 @@ public class DialogueStringScript : MonoBehaviour
             {
                 SetQuoteGraphics(nextInQueue.quote);
             }
+            timeInPrompt = 0;
             AudioManager.instance.Play("Buttons");
         }
 
         // Flags the end of the display tree's lifecycle if there are no quotes left to display
         else
         {
+            if (!queuedSpecial && currentTree.options != null)
+            {
+                bool result = TryQueueSpecialEvent();
+                queuedSpecial = true;
+                if(result) return;
+            }
             Debug.Log("a");
             EndDialogueTree();
         }
@@ -85,7 +103,10 @@ public class DialogueStringScript : MonoBehaviour
         ui.root.SetActive(false);
         currentTree = null;
         inTree = false;
-        GameManager.instance.gameState = GameManager.GameState.PRERALLY;
+
+        if (!CinematicSystem.instance.inProgress && GameManager.instance.gameState == GameManager.GameState.DIALOGUE){
+            GameManager.instance.gameState = GameManager.GameState.PRERALLY;
+        }
     }
 
     // Initializes a new tree
@@ -93,9 +114,13 @@ public class DialogueStringScript : MonoBehaviour
     {
         currentTree = tree;
         inTree = true;
+        firstPrompt = true;
+        queuedSpecial = false;
         GameManager.instance.gameState = GameManager.GameState.DIALOGUE;
-        monologueQueue.Enqueue(new QueueEntry(quote: tree.startQuote));
-        monologueQueue.Enqueue(new QueueEntry(options: tree.options));
+
+        foreach (Monologue startQuote in tree.startQuote) { monologueQueue.Enqueue(new QueueEntry(quote: startQuote)); }
+
+        if (!tree.noOptions) { monologueQueue.Enqueue(new QueueEntry(options: tree.options)); }
 
         ui.root.SetActive(true);
         TransitionToNext();
@@ -110,6 +135,14 @@ public class DialogueStringScript : MonoBehaviour
         ui.mainMonologue.text = monologue.text;
         ui.speakerImage.sprite = images[(int)monologue.imageId];
         options = false;
+
+        if (monologue.givesLoveScore)
+        {
+            Debug.Log("gave love?");
+            GameManager.instance.GiveLoveScore(monologue.loveScore);
+        }
+
+        StartCoroutine(MonologueCoroutine(monologue));
     }
 
     // Assigns data for the options UI panel
@@ -119,8 +152,9 @@ public class DialogueStringScript : MonoBehaviour
         this.options = true;
 
         ui.quoteUIRoot.SetActive(false);
-        ui.choiceUIRoot.SetActive(true); 
-        ui.choiceHeader.text = currentTree.optionsHeader; 
+        ui.choiceUIRoot.SetActive(true);
+        ui.choiceHeader.text = currentTree.optionsHeader;
+        ui.speakerImage.sprite = images[(int)options[0].imageId];
 
         for (int i = 0; i < options.Length; i++)
         {
@@ -136,26 +170,72 @@ public class DialogueStringScript : MonoBehaviour
     {
 
         subjectCounter[(int)currentOptions[option].optionType]++;
-
         foreach (Monologue monologue in currentTree.responses[option])
         {
             monologueQueue.Enqueue(new QueueEntry(quote: monologue));
         }
+
+        if (currentOptions[option].optionType == OptionType.INSULTNED) { GameManager.instance.InsultNed(); }
         currentOptions = null;
 
-        TryQueueSpecialEvent();
+        // TryQueueSpecialEvent();
         TransitionToNext();
     }
 
     // Queues a special text upon a special condition at the end of the tree if nessecary
-    public void TryQueueSpecialEvent()
+    public bool TryQueueSpecialEvent()
     {
-        // if(subjectCounter[(int)OptionType.INSULTNED] == 3){ monologueQueue.Enqueue(); return;}
-        // if(subjectCounter[(int)OptionType.INSULTNED] == 3){ monologueQueue.Enqueue(); return;}
-        // if(subjectCounter[(int)OptionType.INSULTNED] == 3){ monologueQueue.Enqueue(); return;}
-        // if(subjectCounter[(int)OptionType.INSULTNED] == 3){ monologueQueue.Enqueue(); return;}
+        if(subjectCounter[(int)OptionType.INSULTNED] == 3){ 
+            monologueQueue.Enqueue(new QueueEntry(Dialogue.specialNedInsult[0])); 
+            monologueQueue.Enqueue(new QueueEntry(Dialogue.specialNedInsult[1])); 
+            return true;
+        }
+        if(subjectCounter[(int)OptionType.RIZZ] == 3 && GameManager.instance.lovePointsThisTree > 0){ 
+            monologueQueue.Enqueue(new QueueEntry(Dialogue.specialCharismatic[Random.Range(0, 2)])); 
+            monologueQueue.Enqueue(new QueueEntry(Dialogue.specialCharismatic[Random.Range(2, 4)])); 
+            return true;
+        }
+        if (subjectCounter[(int)OptionType.ROAST] == 3 && GameManager.instance.lovePointsThisTree > 0)
+        {
+
+            if (Random.Range(0, 2) == 1)
+            {
+                monologueQueue.Enqueue(new QueueEntry(Dialogue.specialRoast[Random.Range(0, 2)]));
+            }
+            else
+            {
+                if (Random.Range(0, 2) == 1)
+                {
+                    monologueQueue.Enqueue(new QueueEntry(Dialogue.specialRoast[2]));
+                }
+                else
+                {
+                    monologueQueue.Enqueue(new QueueEntry(Dialogue.specialRoast[3]));
+                    monologueQueue.Enqueue(new QueueEntry(Dialogue.specialRoast[4]));
+                }
+            }
+            return true;
+        }
+        
+        return false;
     }
 
+
+    public IEnumerator MonologueCoroutine(Monologue monologue, int lettersPerSecond = 15)
+    {
+        ui.mainMonologue.text = "";
+        isScrolling = true;
+
+        for (int i = 0; i < ui.mainMonologue.text.Length; i++)
+        {
+            if (skipScrollingInput) { skipScrollingInput = false; break; }
+            ui.mainMonologue.text += monologue.text[i];
+            yield return new WaitForSecondsRealtime(1.0f / lettersPerSecond);
+        }
+
+        isScrolling = false;
+        ui.mainMonologue.text = monologue.text;    
+    }
 }
 
 /* ------------------------ Supporting Classes and Data Structures -------------------- */
@@ -178,17 +258,25 @@ public class QueueEntry
 [System.Serializable]
 public class DialogueTree
 {
-    public Monologue startQuote;
+    public Monologue[] startQuote;
     public DialogueOption[] options;
     public string optionsHeader;
+    public bool noOptions {get{ return options == null; }}
     public Monologue[/* option choice index */][ /* Response count */ ] responses;
 
     public DialogueTree(Monologue startQuote, DialogueOption[] options, Monologue[][] responses, string optionsHeader = "HOW DO YOU RESPOND?")
     {
-        this.startQuote = startQuote;
+        this.startQuote = new Monologue[] { startQuote };
         this.options = options;
         this.responses = responses;
         this.optionsHeader = optionsHeader;
+    }
+    public DialogueTree(Monologue[] startQuote)
+    {
+        this.startQuote = startQuote;
+        options = null;
+        responses = null;
+        optionsHeader = "";
     }
 }
 
@@ -264,21 +352,21 @@ public static class Dialogue
     {
         /* --- Dialogue tree 1 --- */
         new DialogueTree(
-            new Monologue("LILY: To start the game off in good spirits, I want you to tell me a joke", QuoteImage.JEQUEVONTEProudImage), // Starting Text
+            new Monologue("LILY: I want you to tell me a joke", QuoteImage.LILYFlatteredImage), // Starting Text
             
             new DialogueOption[3]{ // Options List
                 new DialogueOption("Why did the chicken cross the road? to get to the other side", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
                 new DialogueOption("Jequevonte serves like he's scared of being swatted!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
-                new DialogueOption("Do I need to? Ned’s existence is a joke hahaha", QuoteImage.NEDInsultedImage, OptionType.INSULTNED)
+                new DialogueOption("Do I need to? Ned’s existence is a joke hahaha", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
                 
                 new Monologue[]{ // Option 1 responses
-                    new Monologue("LILY: That joke was ass.", QuoteImage.LILYFlatteredImage)
+                    new Monologue("LILY: That joke was ass.", QuoteImage.LILYDissapointed)
                 },
                 new Monologue[]{ // Option 2 responses
-                    new Monologue("LILY: LOLOLOL you kinda funny twin", QuoteImage.JEQUEVONTEUpsetImage, loveScore: 10)
+                    new Monologue("LILY: LOLOLOL you kinda funny twin", QuoteImage.LILYFlatteredImage, loveScore: 10)
                 },
                 new Monologue[]{ // Option 3 responses
                     new Monologue("LILY: ...", QuoteImage.NEDInsultedImage) // Will always be insulting ned
@@ -303,7 +391,7 @@ public static class Dialogue
                     new Monologue("...", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 2 responses
-                    new Monologue("LILY: ..Was that a joke as well? NOBODY 'wins' me. ", QuoteImage.LILYFlatteredImage),
+                    new Monologue("LILY: ..Was that a joke as well? NOBODY 'wins' me. ", QuoteImage.LILYDissapointed),
                     new Monologue("NED: and thats on PERIODT ", QuoteImage.NEDNormal)
                 },
                 new Monologue[]{ // Option 3 responses
@@ -340,7 +428,7 @@ public static class Dialogue
         
         /* --- Dialogue tree 4 --- */
         new DialogueTree(
-            new Monologue("LILY: To be honest, it’s been fun but I’m kind of getting bored here...\n...\nHey. Whats your favourite color?", QuoteImage.LILYDissapointed), // Starting Text
+            new Monologue("LILY: To be honest, it’s been fun but I’m kind of getting bored here... Hey. Whats your favourite color?", QuoteImage.LILYDissapointed), // Starting Text
             
             new DialogueOption[3]{ // Options List
                 new DialogueOption("Whatever colour you like is my favourite, Lily.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
@@ -377,11 +465,11 @@ public static class Dialogue
             new Monologue[][]{ // List of responses depending on option chosen
                 
                 new Monologue[]{ // Option 1 responses
-                    new Monologue("LILY: Go on! My lovebug", QuoteImage.LILYFlatteredImage, 10),
-                    new Monologue("JEQUEVONTE...", QuoteImage.JEQUEVONTEUpsetImage)
+                    new Monologue("LILY: Six..Seven..really? Lame.", QuoteImage.LILYDissapointed),
                 },
                 new Monologue[]{ // Option 2 responses
-                    new Monologue("LILY: Six..Seven..really? Lame.", QuoteImage.LILYDissapointed),
+                    new Monologue("LILY: Go on! My lovebug", QuoteImage.LILYFlatteredImage, 10),
+                    new Monologue("JEQUEVONTE...", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 3 responses
                     new Monologue("NED: please no more...", QuoteImage.NEDInsultedImage), // Will always be insulting ned
@@ -448,8 +536,8 @@ public static class Dialogue
             new Monologue("Damn bro you got beat harder than I am LOL", QuoteImage.NEDNormal), // Starting Text
             
             new DialogueOption[3]{ // Options List
-                new ("Lily can beat me any day of the week.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
                 new ("Save that for Jequavonte as I walk home with my girl", QuoteImage.BARTHOLEMEWIdleImage, OptionType.ROAST),
+                new ("Lily can beat me any day of the week.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
                 new ("Ned you clearly don't own an air fryer.", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
@@ -457,7 +545,7 @@ public static class Dialogue
                 
                 new Monologue[]{ // Option 1 responses
                     new ("JEQUEVONTE: Lets see about that!", QuoteImage.JEQUEVONTEProudImage),
-                    new ("LILY: How cute.. I’d love to take you to my...house... and wrap you up in my little web!", QuoteImage.LILYFlatteredImage)
+                    new ("LILY: How cute.. I’d love to take you to my...house... and wrap you up in my little web!", QuoteImage.LILYFlatteredImage, 10)
                 },
                 new Monologue[]{ // Option 2 responses
                     new ("LILY: While I love a good hunt, you should probably talk to someone about that... Like, a professional you know?", QuoteImage.LILYDissapointed),
@@ -524,7 +612,7 @@ public static class Dialogue
             new DialogueOption[3]{ // Options List
                 new ("Me? Weak? I was just holding back!", QuoteImage.BARTHOLEMEWProudImage, OptionType.ROAST),
                 new ("The only thing I’m weak for is Queen Lily!", QuoteImage.BARTHOLEMEWIdleImage, OptionType.RIZZ),
-                new ("Largest paragraph in the game specifically insulting ned", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
+                new ("*Comically large paragraph in the game specifically insulting ned", QuoteImage.BARTHOLEMEWIdleImage, OptionType.INSULTNED)
             },
 
             new Monologue[][]{ // List of responses depending on option chosen
@@ -567,4 +655,131 @@ public static class Dialogue
             }
         )
     };
+
+    public static DialogueTree[] introTrees = new DialogueTree[]
+    {
+        new DialogueTree(
+            new Monologue[] {
+                new("JEQUEVONTE: Hey...", QuoteImage.JEQUEVONTEIdleImage),
+                new("BARTHOLEMEW: What's going on here!??", QuoteImage.BARTHOLEMEWIdleImage),
+                new("JEQUEVONTE: Lily, why are you", QuoteImage.JEQUEVONTEIdleImage),
+                new("BARTHOLEMEW: --with HIM!!??", QuoteImage.BARTHOLEMEWdissapointedImage),
+
+                new("LILY: I- oh dear. Hi boys... I can explain...", QuoteImage.LILYDissapointed),
+                new("NED: Uhm..So is that a yes? :D", QuoteImage.NEDNormal),
+                new("LILY: Ned-", QuoteImage.LILYDissapointed),
+
+                new("BARTHOLEMEW: Hold on..why are YOU here as well? I'm the one dating Lily here!", QuoteImage.BARTHOLEMEWIdleImage),
+                new("JEQUEVONTE: What? That's MY line! I'm the one who's dating Lily!", QuoteImage.JEQUEVONTEIdleImage),
+                new("NED: What?? But I thought Lily was single!", QuoteImage.NEDInsultedImage),
+
+                new("BARTHOLEMEW: Stay out of this you wierd...voluptuous toad!!!", QuoteImage.BARTHOLEMEWIdleImage),
+                new("NED: Hello? I'm a frog first of all and my name is Ned! I don't even know who you freaks are!! I'm just here for the beautiful and mesmerizing Queen Lily", QuoteImage.NEDNormal),
+                new("JEQUEVONTE: Well you can't have her! She's MINE!", QuoteImage.JEQUEVONTEIdleImage),
+                new("BARTHOLEMEW: Excuse you, she's MINE actually!", QuoteImage.BARTHOLEMEWIdleImage),
+                new("JEQUEVONTE: No she's--", QuoteImage.JEQUEVONTEIdleImage),
+                new("LILY: ENOUGH!!", QuoteImage.LILYDissapointed),
+                new("BARTHOLEMEW: ...", QuoteImage.BARTHOLEMEWIdleImage),
+                new("JEQUEVONTE: ...", QuoteImage.JEQUEVONTEIdleImage),
+                new("Ned: ...", QuoteImage.JEQUEVONTEIdleImage),
+                new("LILY: If you want to have me for yourself then show me that you're worthy enough to keep me. And I know just the way!", QuoteImage.LILYFlatteredImage),
+                new("Ned: ...\n Haha... why are you looking at me like that Lily??", QuoteImage.JEQUEVONTEIdleImage),
+            }
+        ),
+
+        new DialogueTree(
+            new Monologue[] {
+                new("NED: ...Ok I did NOT consent to this.", QuoteImage.NEDInsultedImage),
+                new("LILY: For one of you to win my loyalty and love, one of you two bugs need to win this game of Bump Frog and win my heart at the same time!", QuoteImage.LILYFlatteredImage),
+                new("BARTHOLEMEW: Oh you got it! I'll get this easy peezy!", QuoteImage.BARTHOLEMEWProudImage),
+                new("JEQUEVONTE: Bring it on!!!", QuoteImage.JEQUEVONTEProudImage)
+            }
+        )
+    };
+
+    public static DialogueTree[] outroTrees = new DialogueTree[]
+    {
+
+        new DialogueTree(
+            new Monologue[] {
+
+                new("LILY: Well...I have to admit. You’re pretty impressive Barty. Winning or losing.", QuoteImage.LILYFlatteredImage),
+                new("BARTHOLEMEW: Heh I have my moments. But I’d never let Jequavonte or that...weird ball guy get in my way when it comes to you!!", QuoteImage.BARTHOLEMEWProudImage),
+                new("NED: Hello? I have a name too! Y’know, Ned? Why does everybody treat me like this?!", QuoteImage.NEDNormal),
+                new("BARTHOLEMEW: Shut up Ned.", QuoteImage.BARTHOLEMEWIdleImage),
+                new("JEQUEVONTE: Yeah Ned, keep out of this. ", QuoteImage.JEQUEVONTEIdleImage),
+                new("NED: I...why am I even still here. I’m out!! Lily’s not even that pretty anyways, I’ll find a new pond to hop in! Forget you freaks!!", QuoteImage.NEDInsultedImage),
+                new("*Ned disappears* (So the ball like vanishes or something)", QuoteImage.NONE),
+                new("LILY: Well anyways, watching you guys battle has made me quite...hungry. And Barty, you’ve impressed me so much today that from now on, there will be no more competition keeping you from me. ", QuoteImage.LILYFlatteredImage),
+                new("BARTHOLEMEW: ...", QuoteImage.BARTHOLEMEWProudImage),
+                new("JEQUEVONTE: What is...that supposed to mean?", QuoteImage.JEQUEVONTEUpsetImage),
+                new("LILY: Well...let me show you!", QuoteImage.LILYFlatteredImage),
+                new("JEQUEVONTE: ...Hey...I don’t like this... What are you--", QuoteImage.NONE),
+                new("AAAAAAAAAAAAAHHHHHH", QuoteImage.NONE),
+            }
+        ),
+
+        new DialogueTree(
+            new Monologue[] {
+                new("JEQUEVONTE: Well that was easy-peezy. Were you even trying? Win or lose against me, it doesn’t matter if you can’t win Lily’s heart.", QuoteImage.JEQUEVONTEProudImage),
+                new("LILY: Well this has been...", QuoteImage.LILYDissapointed),
+                new("Hmm...", QuoteImage.LILYDissapointed),
+                new("Rather disappointing if I’ll admit. I was rooting for you, Barty.", QuoteImage.LILYDissapointed),
+                new("NED: This is too embarrassing. I can’t watch this!! ", QuoteImage.NEDInsultedImage),
+                new("*Ned disappears* ", QuoteImage.NONE),
+                new("BARTHOLEMEW: I’m sorry! I don’t know what went wrong, I don’t think my mind was in the game. ", QuoteImage.BARTHOLEMEWdissapointedImage),
+                new("LILY: Hm. Clearly not. You’re more useless than a maggot. ", QuoteImage.LILYDissapointed),
+                new("BARTHOLEMEW: I promise I’m not! Is there any way I can be of use to you? I can’t lose you Lily!", QuoteImage.BARTHOLEMEWdissapointedImage),
+                new("LILY: ...", QuoteImage.LILYDissapointed),
+                new("Well...", QuoteImage.LILYDissapointed),
+                new("There is one thing I can think of to put you to use...", QuoteImage.LILYFlatteredImage),
+                new("JEQUEVONTE: Uh oh...", QuoteImage.JEQUEVONTEProudImage),
+                new("BARTHOLEMEW: What is it? I’ll do anything!", QuoteImage.BARTHOLEMEWIdleImage),
+                new("LILY: Come closer and I’ll tell you...", QuoteImage.LILYFlatteredImage),
+                new("...", QuoteImage.BARTHOLEMEWIdleImage),
+                new("Closer...", QuoteImage.LILYDissapointed),
+                new("BARTHOLEMEW: Wait what’s going on? ", QuoteImage.NONE),
+                new("No..no... Get away!", QuoteImage.NONE),
+                new("NOOOOOOOOOOOOOO", QuoteImage.NONE)
+            }
+        ),
+
+        new DialogueTree(
+            new Monologue[] {
+                new("NED: ...", QuoteImage.NEDInsultedImage),
+                new("You really shouldn’t have done that..", QuoteImage.NEDInsultedImage),
+                new("BARTHOLEMEW: What is this? Whats happening??", QuoteImage.NEDInsultedImage),
+                new("LILY: Oh no.. This is why you should’ve just focused on me! Not that dumb frog!", QuoteImage.NEDInsultedImage),
+                new("JEQUEVONTE: This can’t be happening.", QuoteImage.NEDInsultedImage),
+                new("NED: I’ve had enough of this. You’ve crossed the line and now you shall pay for your sins...", QuoteImage.NEDInsultedImage),
+                new("BARTHOLEMEW: What are you... ", QuoteImage.NEDInsultedImage),
+                new("AAAAAAAAAA", QuoteImage.NEDInsultedImage)
+            }
+        )
+    };
+
+    public static Monologue[] specialCharismatic = new Monologue[]{
+        new("LILY: My my, look who’s a charmer! You’re on a roll today aren’t you? I wouldn’t expect any less.", QuoteImage.LILYFlatteredImage),
+        new("LILY: Aaw, you’re adorable. I just want to sink my teeth into you!!", QuoteImage.LILYFlatteredImage),
+
+        new("JEQUEVONTE: Yeah, yeah we get it! Didn’t know we had Prince Charming over here...", QuoteImage.JEQUEVONTEIdleImage),
+        new("JEQUEVONTE: Hey, I'll shut your mouth real soon!! The Queen won't fall for your cheap tricks!!", QuoteImage.JEQUEVONTEIdleImage)
+    };
+
+    public static Monologue[] specialNedInsult = new Monologue[]{
+        new("LILY: I know they say to keep your eyes on the ball but the only person you should keep your eyes on is me!  Pay attention to me, not that...voluptuous frog.", QuoteImage.LILYDissapointed),
+        new("NED: One day you will have to answer for your actions.\nAnd god may not be so... merciful.", QuoteImage.NEDInsultedImage)
+        
+        // new("LILY: Such a bore...! Are you sure you’re going against the right person here?", QuoteImage.LILYFlatteredImage),
+    };
+
+    public static Monologue[] specialRoast = new Monologue[]{
+        new("LILY: Oh my lovelies, I just ADORE it when you fight like this. What a feast for the eyes.", QuoteImage.LILYFlatteredImage),
+        new("LILY: Nothing gets me more riled up than watching you little bugs fight!", QuoteImage.LILYFlatteredImage),
+
+        new("NED: WOO GET HIS ASS! (and not mine pls) ", QuoteImage.NEDNormal),
+        new("NED: DAMN sick burn. So how about, uh, letting me go?", QuoteImage.NEDNormal),
+        new("BARTHOLEMEW: Nah.", QuoteImage.BARTHOLEMEWProudImage)
+    };
+    // public static
 }

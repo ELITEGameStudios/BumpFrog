@@ -390,7 +390,7 @@ public static class Dialogue
                 
                 new Monologue[]{ // Option 1 responses
                     new Monologue("LILY: Hmm..you can be quite charming when you get fiesty. I like that.", QuoteImage.LILYFlatteredImage, loveScore: 10),
-                    new Monologue("...", QuoteImage.JEQUEVONTEUpsetImage)
+                    new Monologue("JEQUAVONTE: ...", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 2 responses
                     new Monologue("LILY: ..Was that a joke as well? NOBODY 'wins' me. ", QuoteImage.LILYDissapointed),
@@ -420,7 +420,7 @@ public static class Dialogue
                 },
                 new Monologue[]{ // Option 2 responses
                     new Monologue("LILY: How dedicated you are...how...adorable. Hehe. I just want to wrap you up in my web and eat you!", QuoteImage.LILYFlatteredImage, loveScore: 10),
-                    new Monologue("...", QuoteImage.JEQUEVONTEUpsetImage)
+                    new Monologue("JEQUAVONTE: ...", QuoteImage.JEQUEVONTEUpsetImage)
                 },
                 new Monologue[]{ // Option 3 responses
                     new Monologue("NED: ... ", QuoteImage.NEDInsultedImage) // Will always be insulting ned
@@ -445,8 +445,8 @@ public static class Dialogue
                 },
                 new Monologue[]{ // Option 2 responses
                     new Monologue("LILY: How dedicated you are...how...adorable. Hehe. I just want to wrap you up in my web and eat you!", QuoteImage.LILYFlatteredImage, loveScore: 10),
-                    new Monologue("...", QuoteImage.JEQUEVONTEUpsetImage),
-                    new Monologue("...please don't.", QuoteImage.JEQUEVONTEUpsetImage)
+                    new Monologue("YOU: ...", QuoteImage.BARTHOLEMEWdissapointedImage),
+                    new Monologue("YOU: ...ahaha..maybe don't.", QuoteImage.BARTHOLEMEWdissapointedImage)
                 },
                 new Monologue[]{ // Option 3 responses
                     new Monologue("LILY: ... ", QuoteImage.LILYDissapointed), // Will always be insulting ned
@@ -477,7 +477,7 @@ public static class Dialogue
                 new Monologue[]{ // Option 3 responses
                     new Monologue("NED: PLEASE...no..", QuoteImage.NEDNormal), // Will always be insulting ned
                     new Monologue("NED: ..no..more..", QuoteImage.NEDInsultedImage),
-                    new Monologue("BARTHOLEMEW: HEHEHE BALL AINT GONNA SERVE ITSELF-", QuoteImage.BARTHOLEMEWProudImage) // Will always be insulting ned
+                    new Monologue("YOU: HEHEHE BALL AINT GONNA SERVE ITSELF-", QuoteImage.BARTHOLEMEWProudImage) // Will always be insulting ned
                 }
             }
         ),
@@ -501,7 +501,7 @@ public static class Dialogue
                     new Monologue("LILY: Oh! Well, how thrilling and exciting then.. Show me", QuoteImage.LILYFlatteredImage)
                 },
                 new Monologue[]{ // Option 3 responses
-                    new Monologue("Ned:...Let it all be over soon..please..", QuoteImage.NEDInsultedImage)
+                    new Monologue("NED:...Let it all be over soon..please..", QuoteImage.NEDInsultedImage)
                 }
             }
         ),
@@ -707,7 +707,7 @@ public static class Dialogue
         new DialogueTree(
             new Monologue[] {
                 new("NED: ...Ok I did NOT consent to this.", QuoteImage.NEDInsultedImage),
-                new("LILY: For one of you to win my loyalty and love, one of you two bugs need to win this game of Bump Frog and win my heart at the same time!", QuoteImage.LILYFlatteredImage),
+                new("LILY: To win my loyalty and love, one of you two bugs need to win this game of Bump Frog and win my heart at the same time!", QuoteImage.LILYFlatteredImage),
                 new("BARTHOLEMEW: Oh you got it! I'll get this easy peezy!", QuoteImage.BARTHOLEMEWProudImage),
                 new("JEQUEVONTE: Bring it on!!!", QuoteImage.JEQUEVONTEProudImage)
             }
@@ -721,14 +721,14 @@ public static class Dialogue
             new Monologue[] {
 
                 new("LILY: Well...I have to admit. You’re pretty impressive Barty. Winning or losing.", QuoteImage.LILYFlatteredImage),
-                new("BARTHOLEMEW: Heh I have my moments. But I’d never let Jequavonte or that...weird ball guy get in my way when it comes to you!!", QuoteImage.BARTHOLEMEWProudImage),
+                new("YOU: Heh I have my moments. But I’d never let Jequavonte or that...weird ball guy get in my way when it comes to you!!", QuoteImage.BARTHOLEMEWProudImage),
                 new("NED: Hello? I have a name too! Y’know, Ned? Why does everybody treat me like this?!", QuoteImage.NEDNormal),
-                new("BARTHOLEMEW: Shut up Ned.", QuoteImage.BARTHOLEMEWIdleImage),
+                new("YOU: Shut up Ned.", QuoteImage.BARTHOLEMEWIdleImage),
                 new("JEQUEVONTE: Yeah Ned, keep out of this. ", QuoteImage.JEQUEVONTEIdleImage),
                 new("NED: I...why am I even still here. I’m out!! Lily’s not even that pretty anyways, I’ll find a new pond to hop in! Forget you freaks!!", QuoteImage.NEDInsultedImage),
                 new("*Ned disappears* (So the ball like vanishes or something)", QuoteImage.NONE),
                 new("LILY: Well anyways, watching you guys battle has made me quite...hungry. And Barty, you’ve impressed me so much today that from now on, there will be no more competition keeping you from me. ", QuoteImage.LILYFlatteredImage),
-                new("BARTHOLEMEW: ...", QuoteImage.BARTHOLEMEWProudImage),
+                new("YOU: ...", QuoteImage.BARTHOLEMEWProudImage),
                 new("JEQUEVONTE: What is...that supposed to mean?", QuoteImage.JEQUEVONTEUpsetImage),
                 new("LILY: Well...let me show you!", QuoteImage.LILYFlatteredImage),
                 new("JEQUEVONTE: ...Hey...I don’t like this... What are you--", QuoteImage.NONE),
@@ -744,18 +744,18 @@ public static class Dialogue
                 new("Rather disappointing if I’ll admit. I was rooting for you, Barty.", QuoteImage.LILYDissapointed),
                 new("NED: This is too embarrassing. I can’t watch this!! ", QuoteImage.NEDInsultedImage),
                 new("*Ned disappears* ", QuoteImage.NONE),
-                new("BARTHOLEMEW: I’m sorry! I don’t know what went wrong, I don’t think my mind was in the game. ", QuoteImage.BARTHOLEMEWdissapointedImage),
+                new("YOU: I’m sorry! I don’t know what went wrong, I don’t think my mind was in the game. ", QuoteImage.BARTHOLEMEWdissapointedImage),
                 new("LILY: Hm. Clearly not. You’re more useless than a maggot. ", QuoteImage.LILYDissapointed),
-                new("BARTHOLEMEW: I promise I’m not! Is there any way I can be of use to you? I can’t lose you Lily!", QuoteImage.BARTHOLEMEWdissapointedImage),
+                new("YOU: I promise I’m not! Is there any way I can be of use to you? I can’t lose you Lily!", QuoteImage.BARTHOLEMEWdissapointedImage),
                 new("LILY: ...", QuoteImage.LILYDissapointed),
                 new("Well...", QuoteImage.LILYDissapointed),
                 new("There is one thing I can think of to put you to use...", QuoteImage.LILYFlatteredImage),
                 new("JEQUEVONTE: Uh oh...", QuoteImage.JEQUEVONTEProudImage),
-                new("BARTHOLEMEW: What is it? I’ll do anything!", QuoteImage.BARTHOLEMEWIdleImage),
+                new("YOU: What is it? I’ll do anything!", QuoteImage.BARTHOLEMEWIdleImage),
                 new("LILY: Come closer and I’ll tell you...", QuoteImage.LILYFlatteredImage),
                 new("...", QuoteImage.BARTHOLEMEWIdleImage),
                 new("Closer...", QuoteImage.LILYDissapointed),
-                new("BARTHOLEMEW: Wait what’s going on? ", QuoteImage.NONE),
+                new("YOU: Wait what’s going on? ", QuoteImage.NONE),
                 new("No..no... Get away!", QuoteImage.NONE),
                 new("NOOOOOOOOOOOOOO", QuoteImage.NONE)
             }
@@ -764,13 +764,13 @@ public static class Dialogue
         new DialogueTree(
             new Monologue[] {
                 new("NED: ...", QuoteImage.NEDInsultedImage),
-                new("You really shouldn’t have done that..", QuoteImage.NEDInsultedImage),
-                new("BARTHOLEMEW: What is this? Whats happening??", QuoteImage.NEDInsultedImage),
+                new("NED: You really shouldn’t have done that..", QuoteImage.NEDInsultedImage),
+                new("YOU: : What is this? Whats happening??", QuoteImage.NEDInsultedImage),
                 new("LILY: Oh no.. This is why you should’ve just focused on me! Not that dumb frog!", QuoteImage.NEDInsultedImage),
                 new("JEQUEVONTE: This can’t be happening.", QuoteImage.NEDInsultedImage),
                 new("NED: I’ve had enough of this. You’ve crossed the line and now you shall pay for your sins...", QuoteImage.NEDInsultedImage),
-                new("BARTHOLEMEW: What are you... ", QuoteImage.NEDInsultedImage),
-                new("AAAAAAAAAA", QuoteImage.NEDInsultedImage)
+                new("YOU: What are you... ", QuoteImage.NEDInsultedImage),
+                new("YOU: AAAAAAAAAA", QuoteImage.NEDInsultedImage)
             }
         )
     };

@@ -371,7 +371,7 @@ public static class Dialogue
                 },
                 new Monologue[]{ // Option 3 responses
                     new Monologue("LILY: ...", QuoteImage.LILYDissapointed), // Will always be insulting ned
-                    new Monologue("Ned: ...", QuoteImage.NEDInsultedImage)
+                    new Monologue("NED: ...", QuoteImage.NEDInsultedImage)
                 }
             }
         ),
@@ -796,7 +796,7 @@ public static class Dialogue
 
         new("NED: WOO GET HIS ASS! (and not mine pls) ", QuoteImage.NEDNormal),
         new("NED: DAMN sick burn. So how about, uh, letting me go?", QuoteImage.NEDNormal),
-        new("BARTHOLEMEW: Nah.", QuoteImage.BARTHOLEMEWProudImage)
+        new("YOU: Nah.", QuoteImage.BARTHOLEMEWProudImage)
     };
     // public static
 }

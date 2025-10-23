@@ -116,7 +116,7 @@ public class CinematicSystem : MonoBehaviour
         }
 
         inProgress = false;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
         // GameManager.instance.gameState = GameManager.GameState.PRERALLY;
 
     }
@@ -151,7 +151,7 @@ public class CinematicSystem : MonoBehaviour
         }
 
         inProgress = false;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
         // GameManager.instance.gameState = GameManager.GameState.PRERALLY;
 
     }

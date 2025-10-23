@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class VNEventManager : MonoBehaviour
 {
@@ -93,5 +94,6 @@ public class VNEventManager : MonoBehaviour
     private IEnumerator FadeOutOnly()
     {
         yield return Fade(1); // fade to black
+        SceneManager.LoadScene(0);
     }
 }

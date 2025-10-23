@@ -6547,6 +6547,12 @@ MonoBehaviour:
   playerPoints: 0
   enemyPoints: 0
   maxPoints: 7
+  loveScore: 0
+  targetLoveScore: 0
+  nedInsultScore: 0
+  targetNedInsultScore: 0
+  netPoints: 0
+  lovePointsThisTree: 0
   playerPointText: {fileID: 0}
   enemyPointText: {fileID: 0}
   ballStartPosition: {fileID: 0}
@@ -6555,6 +6561,10 @@ MonoBehaviour:
   loseText: {fileID: 0}
   winImage: {fileID: 0}
   loseImage: {fileID: 0}
+  gameState: 0
+  loveSlider: {fileID: 0}
+  rageSlider: {fileID: 0}
+  stringScript: {fileID: 0}
 --- !u!1001 &2130434023
 PrefabInstance:
   m_ObjectHideFlags: 0

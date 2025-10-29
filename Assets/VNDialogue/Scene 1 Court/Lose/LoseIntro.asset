@@ -26,9 +26,10 @@ MonoBehaviour:
     - choiceText: You really played amazing
       nextDialogue: {fileID: 11400000, guid: be9d7f018b5024947946f0c0e6b1eaae, type: 2}
     - choiceText: It was a close match
-      nextDialogue: {fileID: 0}
+      nextDialogue: {fileID: 11400000, guid: 69073afa68285b34f98803b67c5c5368, type: 2}
     - choiceText: Sun was in my eyes
-      nextDialogue: {fileID: 0}
+      nextDialogue: {fileID: 11400000, guid: e28db57a9f63ebd468effb4e42f41628, type: 2}
   continueToNextDialogue: 0
   nextDialogue: {fileID: 0}
   eventType: 0
+  targetCameraID: 0

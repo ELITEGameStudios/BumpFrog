@@ -34,5 +34,6 @@ MonoBehaviour:
     hasChoices: 0
     choices: []
   continueToNextDialogue: 1
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: 3775d2b142405be4295c4cffb046910c, type: 2}
   eventType: 0
+  targetCameraID: 0

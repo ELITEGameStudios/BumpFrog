@@ -102,6 +102,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void GoToNextLevel()
+    {
+        SceneManager.LoadScene(2);
+    }
+
 
     void PlayWinSequence(bool players)
     {

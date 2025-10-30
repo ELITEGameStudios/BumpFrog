@@ -28,5 +28,6 @@ MonoBehaviour:
     - choiceText: Mew and Leave
       nextDialogue: {fileID: 11400000, guid: 488d5cc15923af1439e68de55d52d023, type: 2}
   continueToNextDialogue: 0
-  nextDialogue: {fileID: 11400000, guid: eb76cb3aef1217c43a192650e2de2236, type: 2}
+  nextDialogue: {fileID: 0}
   eventType: 0
+  targetCameraID: 0

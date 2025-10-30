@@ -19,6 +19,11 @@ public class VNEventManager : MonoBehaviour
     public Transform rivalCaughtPosition;
     public float rivalMoveDuration = 1f;
 
+    void Start()
+    {
+        StartCoroutine(Fade(0)); // fade back in
+    }
+    
     // Switch camera by index
     public void FadeOutAndChangeCamera(int cameraID)
     {

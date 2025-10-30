@@ -45,6 +45,7 @@ public class VNDialogueManager : MonoBehaviour
     {
         // ✅ Choose starting dialogue based on outcome
         dialogueObject = playerWon ? dialogueObjectWin : dialogueObjectLose;
+        Time.timeScale = 1;
 
         if (nextButton != null)
             nextButton.onClick.AddListener(DisplayNextLine);
